@@ -30,6 +30,7 @@
             <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.1.0.RELEASE" />
+            <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" />
             <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:3.1.0.RELEASE" />
@@ -425,6 +426,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.mongodb:mongo-java-driver:2.7.0">
