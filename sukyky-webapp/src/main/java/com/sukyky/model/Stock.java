@@ -15,6 +15,7 @@ public class Stock {
     @Column(unique = true)
     public String name;
 
+    @OneToMany
     public List<Order> orders;
 
 }

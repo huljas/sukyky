@@ -27,12 +27,9 @@
 
     <div class="content-big">
         <ul class="list">
-            <li><a href="#"><b>AAPL</b> 545.7 +3.18 +0.2%</a></li>
-            <li><b>AAPL</b> 545.7 +3.18 +0.2%</li>
-            <li><b>AAPL</b> 545.7 +3.18 +0.2%</li>
-            <li><b>AAPL</b> 545.7 +3.18 +0.2%</li>
-            <li><b>AAPL</b> 545.7 +3.18 +0.2%</li>
-            <li><b>AAPL</b> 545.7 +3.18 +0.2%</li>
+            <c:forEach items="${stocks}" var="stock">
+                <li>${stock.name}: ${stock.lastPrice} ${stock.change} ${stock.changePercentage}</li>
+            </c:forEach>
         </ul>
     </div>
 

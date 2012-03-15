@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.1.0.RELEASE</spring.version>
+        <hibernate.version>3.5.6-Final</hibernate.version>
 	</properties>
 
 	<repositories>
@@ -38,13 +39,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<!-- 2# SPRING DATA -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 
@@ -146,16 +140,12 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<!-- DATA DRIVERS -->
-
 		<!-- Mongo -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.7.0</version>
 		</dependency>
-
 
 
 	</dependencies>
