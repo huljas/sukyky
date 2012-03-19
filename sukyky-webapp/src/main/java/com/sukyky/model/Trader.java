@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Trader {
 
-    @Id
+    @Id @GeneratedValue
     public Long id;
 
     @Column(unique = true)

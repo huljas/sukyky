@@ -10,7 +10,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -36,9 +39,12 @@ public class DataInitializer {
         }
     }
 
+    @Transactional
     public void populateStocks() throws IOException {
         logger.info("Populating stocks from file {}", stocksFile.getFilename());
-        Yaml yaml = new Yaml();
+        Constructor constructor = new Constructor();
+        constructor.addTypeDescription(new TypeDescription(Stock.class, "!stock"));
+        Yaml yaml = new Yaml(constructor);
         for (Object stock : yaml.loadAll(stocksFile.getInputStream())) {
             stockRepository.save((Stock)stock);
         }

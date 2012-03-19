@@ -1,6 +1,8 @@
 package com.sukyky.repository;
 
 import com.sukyky.model.Stock;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * @author huljas
  */
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class StockRepositoryImpl implements StockRepository {
 
     @PersistenceContext
@@ -21,6 +24,7 @@ public class StockRepositoryImpl implements StockRepository {
         return em.createQuery(criteriaQuery).getResultList();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void save(Stock stock) {
         em.persist(stock);
     }

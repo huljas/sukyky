@@ -1,6 +1,7 @@
 package com.sukyky.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Order {
 
-    @Id
+    @Id @GeneratedValue
     public Long id;
     
     public int amount;
