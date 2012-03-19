@@ -41,15 +41,15 @@ public class Stock {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-    
+
     public int getLastPrice() {
         return 100;
     }
-    
+
     public int getChange() {
         return 101;
     }
-    
+
     public int getChangePercentage() {
         return 1;
     }

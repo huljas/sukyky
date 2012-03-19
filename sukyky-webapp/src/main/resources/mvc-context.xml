@@ -17,11 +17,22 @@
      <mvc:resources mapping="/images/**" location="/images/"/>
      <mvc:resources mapping="/js/**" location="/js/"/>
 
-	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-	    <property name="prefix" value="/WEB-INF/jsp/"/>
-	    <property name="suffix" value=".jsp"/>
-	</bean>
+	 <!--<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+	    <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+	    <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
+	    <!--<property name="suffix" value=".jsp"/>-->
+	<!--</bean>-->
+    
+    <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="false"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+    </bean>
+
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+    </bean>
 	
 	<!-- WEB -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
