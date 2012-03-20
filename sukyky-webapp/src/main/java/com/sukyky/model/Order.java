@@ -1,9 +1,7 @@
 package com.sukyky.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author huljas
@@ -14,12 +12,14 @@ public class Order {
     @Id @GeneratedValue
     public Long id;
     
-    public int amount;
     public int priceA;
 
-    @ManyToOne
+    @Temporal(value = TemporalType.TIMESTAMP)
+    public Date time;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     public Trader seller;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Trader buyer;
     @ManyToOne
     public Stock stock;

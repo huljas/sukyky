@@ -1,6 +1,7 @@
 package com.sukyky.model;
 
 import javax.persistence.*;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,6 +16,19 @@ public class Trader {
     @Column(unique = true)
     public String name;
 
-    @OneToMany
-    public List<Order> orders;
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Holding> holdings;
+
+    public void addHolding(Stock stock) {
+        holdings.add(new Holding(this, stock));
+    }
+
+    public void removeHolding(Stock stock) {
+        Iterator<Holding> iterator = holdings.iterator();
+        for (Holding holding = iterator.next(); iterator.hasNext(); holding = iterator.next()) {
+            if (holding.stock.equals(stock)) {
+                iterator.remove();
+            }
+        }
+    }
 }
