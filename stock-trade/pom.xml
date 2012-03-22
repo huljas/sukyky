@@ -1,8 +1,9 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sukyky-webapp</artifactId>
+    <artifactId>stock-trade</artifactId>
     <packaging>war</packaging>
-    <name>sukyky-webapp</name>
+    <name>stock-trade</name>
+    <version>1.0.1</version>
     <parent>
         <artifactId>sukyky</artifactId>
         <groupId>github.com</groupId>

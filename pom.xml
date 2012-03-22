@@ -5,7 +5,7 @@
 	<artifactId>sukyky</artifactId>
 	<version>1.0.1</version>
     <modules>
-        <module>sukyky-webapp</module>
+        <module>stock-trade</module>
     </modules>
     <packaging>pom</packaging>
 	<properties>
