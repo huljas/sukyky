@@ -23,8 +23,6 @@
 
 <div class="container">
 
-    <b>${stockRepository.toString()}</b>
-
     <div class="content-big">
         <ul class="list">
             <#list stocks as stock>

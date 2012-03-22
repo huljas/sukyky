@@ -24,32 +24,35 @@ public class DataInitializerRepository {
     private EntityManager em;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
-    public void populateData(){
+    public void populateData() {
         logger.info("Populating trade data!");
-        List<Stock> stocks = em.createQuery("select s from Stock s", Stock.class).getResultList();
-        List<Trader> traders = em.createQuery("select t from Trader t", Trader.class).getResultList();
+        if (em.createQuery("select o from TradeOrder o").getResultList().isEmpty()) {
+            List<Stock> stocks = em.createQuery("select s from Stock s", Stock.class).getResultList();
+            List<Trader> traders = em.createQuery("select t from Trader t", Trader.class).getResultList();
 
-        Random random = new Random();
+            Random random = new Random();
 
-        Map<Stock, Integer> prices = new HashMap<Stock, Integer>();
-        for (Stock stock : stocks) {
-            prices.put(stock, random.nextInt(500 + 60000));
+            Map<Stock, Integer> prices = new HashMap<Stock, Integer>();
+            for (Stock stock : stocks) {
+                prices.put(stock, random.nextInt(500 + 60000));
+            }
+
+            for (int i = 0; i < 10000; i++) {
+                Trader seller = traders.get(random.nextInt(traders.size()));
+                Trader buyer = traders.get(random.nextInt(traders.size()));
+                Stock stock = stocks.get(random.nextInt(stocks.size()));
+                TradeOrder order = new TradeOrder();
+                order.buyer = buyer;
+                order.seller = seller;
+                order.stock = stock;
+                order.priceA = prices.get(stock) + random.nextInt(200) - 100;
+                prices.put(stock, order.priceA);
+                order.time = new Date(System.currentTimeMillis() - 3 * 24 * 60 * 60 * 1000L + i * (3 * 24 * 60 * 60 * 1000L) / 10000L);
+                em.persist(order);
+            }
+            logger.info("Data populated OK!");
+        } else {
+            logger.info("Data exists, no need to populate!");
         }
-
-        for (int i = 0; i < 10000; i++) {
-            Trader seller = traders.get(random.nextInt(traders.size()));
-            Trader buyer = traders.get(random.nextInt(traders.size()));
-            Stock stock = stocks.get(random.nextInt(stocks.size()));
-            TradeOrder order = new TradeOrder();
-            order.buyer = buyer;
-            order.seller = seller;
-            order.stock = stock;
-            order.priceA = prices.get(stock) + random.nextInt(200) - 100;
-            prices.put(stock, order.priceA);
-            order.time = new Date(System.currentTimeMillis() - 3*24*60*60*1000L + i * (3*24*60*60*1000L) / 10000L);
-            em.persist(order);
-        }
-
-        logger.info("Data populated OK!");
     }
 }
