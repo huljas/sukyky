@@ -11,8 +11,8 @@
             <!--<property name="hibernate.transaction.flush_before_completion" value="true"/>-->
         <!--</properties>-->
     <!--</persistence-unit>-->
-    <!--<persistence-unit name="stock-trade-mysql">-->
-        <!--<properties>-->
+    <persistence-unit name="stock-trade-mysql">
+        <properties>
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />-->
             <!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost/sukyky" />-->
             <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />-->
@@ -20,6 +20,6 @@
             <!--<property name="hibernate.connection.password" value="" />-->
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
             <!--<property name="hibernate.transaction.flush_before_completion" value="true"/>-->
-        <!--</properties>-->
-    <!--</persistence-unit>-->
+        </properties>
+    </persistence-unit>
 </persistence>

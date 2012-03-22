@@ -108,14 +108,9 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>src/main/db</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>*.sql</include>
-                </includes>
             </resource>
         </resources>
 

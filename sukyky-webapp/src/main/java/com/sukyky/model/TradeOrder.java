@@ -7,6 +7,7 @@ import java.util.Date;
  * @author huljas
  */
 @Entity
+@Table(name="trade_order")
 public class TradeOrder {
 
     @Id @GeneratedValue

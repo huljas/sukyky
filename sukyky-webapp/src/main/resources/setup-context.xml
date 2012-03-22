@@ -5,5 +5,7 @@
 
     <bean id="dataInitializer" class="com.sukyky.setup.DataInitializer" lazy-init="false" init-method="init">
     </bean>
+    
+    <bean id="dataInitializerRepository" class="com.sukyky.setup.DataInitializerRepository"/>
 
 </beans>
