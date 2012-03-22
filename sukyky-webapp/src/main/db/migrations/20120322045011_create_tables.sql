@@ -13,7 +13,7 @@ CREATE TABLE `trader` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tradeorder` (
+CREATE TABLE `trade_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `priceA` int(11) NOT NULL,
   `time` datetime DEFAULT NULL,
