@@ -2,7 +2,7 @@ h1. Sukyky
 
 Project for performance workshop.
 
-!https://github.com/huljas/sukyky/blob/master/mock.PNG?raw=true
+!https://github.com/huljas/sukyky/blob/master/mock.PNG?raw=true!
 
 
 
