@@ -27,7 +27,12 @@ public class Holding {
     }
 
     public Holding(Trader trader, Stock stock) {
+        this(trader, stock, 1);
+    }
+
+    public Holding(Trader trader, Stock stock, int amount) {
         this.owner = trader;
         this.stock = stock;
+        this.amount = amount;
     }
 }

@@ -22,7 +22,10 @@ public class Index {
 	@RequestMapping("/")
 	public String show(Model model) {
         List<Stock> stocks = stockRepository.findAllStocks();		
+
         model.addAttribute("stocks", stocks);
+        model.addAttribute("stockRepository", stockRepository);
+
         return "index";
 	}
 }

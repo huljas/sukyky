@@ -1,8 +1,10 @@
 package com.sukyky.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author huljas
@@ -16,18 +18,25 @@ public class Trader {
     @Column(unique = true)
     public String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    public List<Holding> holdings;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    public Set<Holding> holdings = new HashSet<Holding>();
+
+    public Trader(String name) {
+        this.name = name;
+    }
+
+    public Trader() {
+    }
 
     public void addHolding(Stock stock) {
         holdings.add(new Holding(this, stock));
     }
 
     public void removeHolding(Stock stock) {
-        Iterator<Holding> iterator = holdings.iterator();
-        for (Holding holding = iterator.next(); iterator.hasNext(); holding = iterator.next()) {
+        for (Holding holding : holdings) {
             if (holding.stock.equals(stock)) {
-                iterator.remove();
+                holding.amount--;
+                break;
             }
         }
     }

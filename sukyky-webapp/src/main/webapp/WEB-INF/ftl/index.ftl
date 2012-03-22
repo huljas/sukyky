@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Stock Trade Example</title>
+    <title>Stock Borkers Unlimited</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -16,17 +16,19 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/">Stock Trade Example</a>
+            <a class="brand" href="/">Stock Borkers Unlimited</a>
         </div>
     </div>
 </div>
 
 <div class="container">
 
+    <b>${stockRepository.toString()}</b>
+
     <div class="content-big">
         <ul class="list">
             <#list stocks as stock>
-                <li>${stock.name}: ${stock.lastPrice} ${stock.change} ${stock.changePercentage}</li>
+                <li>${stock.name}: ${stockRepository.getLastPrice(stock)} ${0} ${0}</li>
             </#list>
         </ul>
     </div>

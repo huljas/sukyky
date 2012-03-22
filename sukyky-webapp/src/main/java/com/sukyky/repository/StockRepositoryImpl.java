@@ -1,7 +1,7 @@
 package com.sukyky.repository;
 
 import com.sukyky.model.Holding;
-import com.sukyky.model.Order;
+import com.sukyky.model.TradeOrder;
 import com.sukyky.model.Stock;
 import com.sukyky.model.Trader;
 import org.springframework.transaction.annotation.Propagation;
@@ -10,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +25,8 @@ public class StockRepositoryImpl implements StockRepository {
     public List<Stock> findAllStocks() {
         CriteriaQuery<Stock> criteriaQuery = em.getCriteriaBuilder().createQuery(Stock.class);
         criteriaQuery.from(Stock.class);
-        return em.createQuery(criteriaQuery).getResultList();
+        List<Stock> stocks = em.createQuery(criteriaQuery).getResultList();
+        return stocks;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -35,47 +35,63 @@ public class StockRepositoryImpl implements StockRepository {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void buy(Trader buyer, Stock stock, int price) {
-        List<Order> orders = em.createQuery("select order from Order order where order.stock = :stock and order.priceA <= :price", Order.class)
-                .setParameter("stock", stock).setParameter("price", price).getResultList();
-        
-        Order bestOffer = null;
-        for (Order order : orders) {
-            if (order.buyer == null) {
-                if (bestOffer == null || order.priceA < bestOffer.priceA) {
-                    bestOffer = order;                   
-                }
-            }
-        }
-        if (bestOffer == null) {
-            bestOffer = new Order();
-            bestOffer.buyer = buyer;
-            bestOffer.priceA = price;
-            bestOffer.stock = stock;
-            em.persist(bestOffer);
-        } else {
-            bestOffer.buyer = buyer;
-            bestOffer.buyer.addHolding(stock);
-            bestOffer.seller.removeHolding(stock);
-            em.merge(bestOffer);
-        }
+    public void save(Trader trader) {
+        em.persist(trader);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void sell(Trader seller, Stock stock, int price) {
-        List<Order> orders = em.createQuery("select order from Order order where order.stock = :stock and order.priceA >= :price", Order.class)
+    public void save(Holding holding) {
+        em.persist(holding);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public TradeOrder buy(Trader buyer, Stock stock, int price) {
+        buyer = em.find(Trader.class, buyer.id);
+        stock = em.find(Stock.class, stock.id);
+        List<TradeOrder> tradeOrders = em.createQuery("select order from TradeOrder order where order.stock = :stock and order.priceA <= :price", TradeOrder.class)
                 .setParameter("stock", stock).setParameter("price", price).getResultList();
 
-        Order bestOffer = null;
-        for (Order order : orders) {
-            if (order.buyer == null) {
-                if (bestOffer == null || order.priceA > bestOffer.priceA) {
-                    bestOffer = order;
+        TradeOrder bestOffer = null;
+        for (TradeOrder tradeOrder : tradeOrders) {
+            if (tradeOrder.buyer == null) {
+                if (bestOffer == null || tradeOrder.priceA < bestOffer.priceA) {
+                    bestOffer = tradeOrder;
                 }
             }
         }
         if (bestOffer == null) {
-            bestOffer = new Order();
+            bestOffer = new TradeOrder();
+            bestOffer.buyer = buyer;
+            bestOffer.priceA = price;
+            bestOffer.stock = stock;
+            em.persist(bestOffer);
+        } else {
+            bestOffer.buyer = buyer;
+            bestOffer.buyer.addHolding(stock);
+            bestOffer.seller.removeHolding(stock);
+            bestOffer.time = new Date();
+            em.merge(bestOffer);
+        }
+        return bestOffer;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public TradeOrder sell(Trader seller, Stock stock, int price) {
+        seller = em.find(Trader.class, seller.id);
+        stock = em.find(Stock.class, stock.id);
+        List<TradeOrder> tradeOrders = em.createQuery("select order from TradeOrder order where order.stock = :stock and order.priceA >= :price", TradeOrder.class)
+                .setParameter("stock", stock).setParameter("price", price).getResultList();
+
+        TradeOrder bestOffer = null;
+        for (TradeOrder tradeOrder : tradeOrders) {
+            if (tradeOrder.seller == null) {
+                if (bestOffer == null || tradeOrder.priceA > bestOffer.priceA) {
+                    bestOffer = tradeOrder;
+                }
+            }
+        }
+        if (bestOffer == null) {
+            bestOffer = new TradeOrder();
             bestOffer.seller = seller;
             bestOffer.priceA = price;
             bestOffer.stock = stock;
@@ -84,8 +100,14 @@ public class StockRepositoryImpl implements StockRepository {
             bestOffer.seller = seller;
             bestOffer.buyer.addHolding(stock);
             bestOffer.seller.removeHolding(stock);
+            bestOffer.time = new Date();
             em.merge(bestOffer);
         }
+        return bestOffer;
     }
-    
+
+    public int getLastPrice(Stock stock) {
+        List<Integer> prices = em.createQuery("select o.priceA from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null order by o.time desc", Integer.class).setParameter("stock", stock).getResultList();
+        if (prices.isEmpty()) return 0; else return prices.get(0);
+    }
 }

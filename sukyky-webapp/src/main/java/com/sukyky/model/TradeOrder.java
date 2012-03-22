@@ -7,7 +7,7 @@ import java.util.Date;
  * @author huljas
  */
 @Entity
-public class Order {
+public class TradeOrder {
 
     @Id @GeneratedValue
     public Long id;

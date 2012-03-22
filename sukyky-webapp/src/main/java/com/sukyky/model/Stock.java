@@ -1,7 +1,8 @@
 package com.sukyky.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author huljas
@@ -15,8 +16,15 @@ public class Stock {
     @Column(unique = true)
     public String name;
 
-    @OneToMany
-    public List<Order> orders;
+    @OneToMany(mappedBy = "stock")
+    public Set<TradeOrder> tradeOrders = new HashSet<TradeOrder>();
+
+    public Stock(String name) {
+        this.name = name;
+    }
+
+    public Stock() {
+    }
 
     public Long getId() {
         return id;
@@ -34,24 +42,12 @@ public class Stock {
         this.name = name;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public Set<TradeOrder> getTradeOrders() {
+        return tradeOrders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public int getLastPrice() {
-        return 100;
-    }
-
-    public int getChange() {
-        return 101;
-    }
-
-    public int getChangePercentage() {
-        return 1;
+    public void setTradeOrders(Set<TradeOrder> tradeOrders) {
+        this.tradeOrders = tradeOrders;
     }
 
     @Override
