@@ -28,7 +28,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.5.6-Final</version>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- HSQL -->
@@ -62,6 +61,11 @@
             <groupId>com.carbonfive.db-support</groupId>
             <artifactId>db-migration</artifactId>
             <version>0.9.9-m2</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.6.2</version>
         </dependency>
 
     </dependencies>

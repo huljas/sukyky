@@ -4,6 +4,7 @@ import com.sukyky.model.Holding;
 import com.sukyky.model.TradeOrder;
 import com.sukyky.model.Stock;
 import com.sukyky.model.Trader;
+import org.joda.time.LocalDate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,8 +107,16 @@ public class StockRepositoryImpl implements StockRepository {
         return bestOffer;
     }
 
-    public int getLastPrice(Stock stock) {
-        List<Integer> prices = em.createQuery("select o.priceA from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null order by o.time desc", Integer.class).setParameter("stock", stock).getResultList();
-        if (prices.isEmpty()) return 0; else return prices.get(0);
+    public TradeOrder getLastTrade(Stock stock) {
+        List<TradeOrder> prices = em.createQuery("select o from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null order by o.time desc", TradeOrder.class)
+                .setParameter("stock", stock).setMaxResults(1).getResultList();
+        if (prices.isEmpty()) return null; else return prices.get(0);
+    }
+
+    public TradeOrder getLastTradeSince(Stock stock, Date since) {
+        List<TradeOrder> prices = em.createQuery("select o from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null and o.time < :since order by o.time desc", TradeOrder.class)
+                .setParameter("stock", stock).setParameter("since", since)
+                .setMaxResults(1).getResultList();
+        if (prices.isEmpty()) return null; else return prices.get(0);
     }
 }

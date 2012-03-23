@@ -7,6 +7,7 @@ import com.sukyky.model.Trader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,5 +29,7 @@ public interface StockRepository {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     TradeOrder sell(Trader seller, Stock stock, int price);
 
-    int getLastPrice(Stock stock);
+    TradeOrder getLastTrade(Stock stock);
+
+    TradeOrder getLastTradeSince(Stock stock, Date date);
 }

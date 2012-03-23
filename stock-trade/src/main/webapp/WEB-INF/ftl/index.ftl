@@ -24,11 +24,18 @@
 <div class="container">
 
     <div class="content-big">
-        <ul class="list">
+        <table>
+            <thead>
+            <tr><th>Stock</th><th>Price</th><th>Change</th><th>Chg %</th></tr>
+            </thead>
+            <tbody>
             <#list stocks as stock>
-                <li>${stock.name}: ${stockRepository.getLastPrice(stock)} ${0} ${0}</li>
+                <tr>
+                    <td>${stock.name}</td><td>${stockHelper.getLastPrice(stock)}</td><td>${stockHelper.getChange(stock)}</td><td>${stockHelper.getChangePercent(stock)}</td></li>
+                </tr>
             </#list>
-        </ul>
+            </tbody>
+        </table>
     </div>
 
     <hr>

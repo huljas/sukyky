@@ -17,15 +17,20 @@ public class Index {
     private static final Logger logger = LoggerFactory.getLogger(Index.class);
     
     @Autowired
+    private StockHelper stockHelper;
+
+    @Autowired
     private StockRepository stockRepository;
-    
-	@RequestMapping("/")
+
+
+    @RequestMapping("/")
 	public String show(Model model) {
         List<Stock> stocks = stockRepository.findAllStocks();		
 
         model.addAttribute("stocks", stocks);
-        model.addAttribute("stockRepository", stockRepository);
+        model.addAttribute("stockHelper", stockHelper);
 
         return "index";
 	}
+
 }
