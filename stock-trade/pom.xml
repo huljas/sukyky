@@ -6,7 +6,7 @@
     <version>1.0.1</version>
     <parent>
         <artifactId>sukyky</artifactId>
-        <groupId>github.com</groupId>
+        <groupId>sukyky.com</groupId>
         <version>1.0.1</version>
     </parent>
 
