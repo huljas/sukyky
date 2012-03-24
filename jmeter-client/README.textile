@@ -1,0 +1,13 @@
+h1. JMeter client how to
+
+Run the following ant command:
+
+cp. ant clean jmeter
+
+Then once the jmeter has started open the <code>src/test/jmeter/Web_Threads.jmx</code>-file.
+
+
+
+
+
+
