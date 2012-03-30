@@ -3,13 +3,22 @@ package com.sukyky.setup;
 import com.sukyky.model.Stock;
 import com.sukyky.model.TradeOrder;
 import com.sukyky.model.Trader;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ConnectionCallback;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -20,39 +29,37 @@ public class DataInitializerRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(DataInitializerRepository.class);
 
+    @Autowired
+    private DataSource dataSource;
+
     @PersistenceContext
     private EntityManager em;
 
+    public boolean hasTradeOrders() {
+        return !em.createQuery("select to from TradeOrder to", TradeOrder.class).setMaxResults(10).getResultList().isEmpty();
+    }
+    
+    public List<Stock> getStocks() {
+        return em.createQuery("select s from Stock s", Stock.class).getResultList();
+    }
+    
+    public List<Trader> getTraders() {
+        return em.createQuery("select t from Trader t", Trader.class).getResultList();
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
-    public void populateData() {
-        logger.info("Populating trade data!");
-        if (em.createQuery("select o from TradeOrder o").getResultList().isEmpty()) {
-            List<Stock> stocks = em.createQuery("select s from Stock s", Stock.class).getResultList();
-            List<Trader> traders = em.createQuery("select t from Trader t", Trader.class).getResultList();
-
-            Random random = new Random();
-
-            Map<Stock, Integer> prices = new HashMap<Stock, Integer>();
-            for (Stock stock : stocks) {
-                prices.put(stock, random.nextInt(500 + 60000));
-            }
-
-            for (int i = 0; i < 10000; i++) {
-                Trader seller = traders.get(random.nextInt(traders.size()));
-                Trader buyer = traders.get(random.nextInt(traders.size()));
-                Stock stock = stocks.get(random.nextInt(stocks.size()));
-                TradeOrder order = new TradeOrder();
-                order.buyer = buyer;
-                order.seller = seller;
-                order.stock = stock;
-                order.priceA = prices.get(stock) + random.nextInt(200) - 100;
-                prices.put(stock, order.priceA);
-                order.time = new Date(System.currentTimeMillis() - 3 * 24 * 60 * 60 * 1000L + i * (3 * 24 * 60 * 60 * 1000L) / 10000L);
-                em.persist(order);
-            }
-            logger.info("Data populated OK!");
-        } else {
-            logger.info("Data exists, no need to populate!");
+    public void batchInsert(List<TradeOrder> tradeOrders) {
+        for (TradeOrder order : tradeOrders) {
+            em.persist(order);
         }
     }
+
+    public void loadDataFile(final File file) {
+        JdbcTemplate template = new JdbcTemplate(dataSource);
+        template.update("SET foreign_key_checks = 0");
+        template.update("LOAD DATA INFILE '" + file.getAbsolutePath().replace("\\", "/") + "' INTO TABLE trade_order");
+        template.update("SET foreign_key_checks = 1");
+    }
+
+
 }

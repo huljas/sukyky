@@ -16,8 +16,8 @@
         <property name="password" value="${database.password}"/>
         <property name="testOnBorrow" value="true"/>
         <property name="validationQuery" value="SELECT 3"/>
-        <property name="maxIdle" value="4"/>
-        <property name="minIdle" value="2"/>
+        <property name="maxIdle" value="6"/>
+        <property name="minIdle" value="4"/>
         <property name="maxActive" value="8"/>
         <property name="maxWait" value="30000"/>
     </bean>
@@ -50,7 +50,7 @@
         <constructor-arg ref="dataSource"/>
         <property name="migrationResolver">
             <bean class="com.carbonfive.db.migration.ResourceMigrationResolver">
-                <property name="migrationsLocation" value="classpath:/migrations"/>
+                <property name="migrationsLocation" value="classpath:/migrations/*.sql"/>
             </bean>
         </property>
     </bean>

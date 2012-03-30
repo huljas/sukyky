@@ -18,9 +18,9 @@ public class TradeOrder {
     @Temporal(value = TemporalType.TIMESTAMP)
     public Date time;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     public Trader seller;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     public Trader buyer;
     @ManyToOne
     public Stock stock;
