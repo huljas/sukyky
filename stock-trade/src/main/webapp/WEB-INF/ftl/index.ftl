@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="css/screen.css" rel="stylesheet">
+    <link href="/css/screen.css" rel="stylesheet">
     <link rel="shortcut icon" href="images/favicon.ico">
 </head>
 
@@ -31,7 +31,10 @@
             <tbody>
             <#list stocks as stock>
                 <tr>
-                    <td>${stock.name}</td><td>${stockHelper.getLastPrice(stock)}</td><td>${stockHelper.getChange(stock)}</td><td>${stockHelper.getChangePercent(stock)}</td></li>
+                        <td><a href="/stock/${stock.id}">${stock.name}</a></td>
+                        <td>${helper.getLastPrice(stock)}</td>
+                        <td>${helper.getChange(stock)}</td>
+                        <td>${helper.getChangePercent(stock)}</td>
                 </tr>
             </#list>
             </tbody>

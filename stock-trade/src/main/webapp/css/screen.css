@@ -1,0 +1,16 @@
+body {
+    color:#000000;
+    font-family:Arial, sans-serif;
+    font-size:110%;
+}
+
+
+a {
+    color:#1155CC;
+    font-family:Arial, sans-serif;
+    font-weight:normal;
+    text-decoration:none;
+    outline-color:initial;
+    outline-style:none;
+    outline-width:initial;
+}
