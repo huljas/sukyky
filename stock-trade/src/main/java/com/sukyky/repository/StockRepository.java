@@ -32,4 +32,6 @@ public interface StockRepository {
     TradeOrder getLastTrade(Stock stock);
 
     TradeOrder getLastTradeSince(Stock stock, Date date);
+
+    Stock getStock(Long id);
 }

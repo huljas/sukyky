@@ -119,4 +119,8 @@ public class StockRepositoryImpl implements StockRepository {
                 .setMaxResults(1).getResultList();
         if (prices.isEmpty()) return null; else return prices.get(0);
     }
+
+    public Stock getStock(Long id) {
+        return em.find(Stock.class, id);
+    }
 }
