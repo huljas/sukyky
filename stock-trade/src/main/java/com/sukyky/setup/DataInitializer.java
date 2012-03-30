@@ -6,6 +6,7 @@ import com.sukyky.model.Trader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,22 @@ public class DataInitializer {
                             order.priceA = price + random.nextInt(200) - 100;
                             price = order.priceA;
                             long time = startL + i * diff / n;
-                            order.time = new Date(time);
+                            LocalDateTime dateTime = new LocalDateTime(time);
+
+                            // 0.00-23.59
+                            int millisOfDay = dateTime.getMillisOfDay();
+
+                            // 0.00-8.00
+                            int workMillisOfDay = millisOfDay / 3;
+
+                            
+                            LocalDateTime workTime = dateTime.millisOfDay().setCopy(workMillisOfDay).plusHours(10);
+                            
+                            if (workTime.getHourOfDay() < 10 || workTime.getHourOfDay() > 18) {
+                                throw new IllegalStateException("Date conversion failed: orig " + dateTime + " work " + workTime);
+                            }
+                            
+                            order.time = workTime.toDateTime().toDate();
                             batch.add(order);
                             if (batch.size() >= 1000) {
                                 dataInitializerRepository.batchInsert(batch);
