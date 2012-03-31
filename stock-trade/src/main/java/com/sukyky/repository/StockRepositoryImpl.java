@@ -1,9 +1,6 @@
 package com.sukyky.repository;
 
-import com.sukyky.model.Holding;
-import com.sukyky.model.TradeOrder;
-import com.sukyky.model.Stock;
-import com.sukyky.model.Trader;
+import com.sukyky.model.*;
 import org.joda.time.LocalDate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -122,5 +119,20 @@ public class StockRepositoryImpl implements StockRepository {
 
     public Stock getStock(Long id) {
         return em.find(Stock.class, id);
+    }
+
+    public RateHistory findRateHistory(Long stockId, LocalDate start, LocalDate end) {
+        List<Object[]> results = em.createNativeQuery("select avg(priceA), date(time) from trade_order " +
+                "where stock_id = :stockId " +
+                "and buyer_id is not null " +
+                "and seller_id is not null " +
+                "and time <= :start and " +
+                "time >= :end " +
+                "group by date(time) order by date(time)")
+                .setParameter("stockId", stockId)
+                .setParameter("start", start.toDateTimeAtStartOfDay().toDate())
+                .setParameter("end", end.toDateTimeAtStartOfDay().toDate())
+                .getResultList();
+        return new RateHistory(results);
     }
 }

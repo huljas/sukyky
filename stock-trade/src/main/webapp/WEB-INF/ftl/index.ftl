@@ -31,10 +31,11 @@
             <tbody>
             <#list stocks as stock>
                 <tr>
-                        <td><a href="/stock/${stock.id}">${stock.name}</a></td>
-                        <td>${helper.getLastPrice(stock)}</td>
-                        <td>${helper.getChange(stock)}</td>
-                        <td>${helper.getChangePercent(stock)}</td>
+                    <td><a href="/stock/${stock.id}">${stock.name}</a></td>
+                    <td>${helper.getLastPrice(stock)}</td>
+                    <td>${helper.getChange(stock)}</td>
+                    <td>${helper.getChangePercent(stock)}</td>
+                    <td><div class="tiny-plot" data-stock-id="${stock.id}" style="height:20px;width:80px;"></div></td>
                 </tr>
             </#list>
             </tbody>
@@ -50,6 +51,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
+<script src="/js/jquery.flot.min.js"></script>
+<script src="/js/plots.js"></script>
 </body>
 </html>

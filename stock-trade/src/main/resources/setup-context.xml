@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
     <bean id="dataInitializer" class="com.sukyky.setup.DataInitializer" lazy-init="false" init-method="init">
-        <property name="tradeOrderData" value="classpath:migrations/trade_order.zip"/>
+        <!--<property name="tradeOrderData" value="classpath:migrations/trade_order.zip"/>-->
     </bean>
     
     <bean id="dataInitializerRepository" class="com.sukyky.setup.DataInitializerRepository"/>

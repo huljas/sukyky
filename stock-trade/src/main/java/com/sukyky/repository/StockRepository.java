@@ -1,9 +1,7 @@
 package com.sukyky.repository;
 
-import com.sukyky.model.Holding;
-import com.sukyky.model.TradeOrder;
-import com.sukyky.model.Stock;
-import com.sukyky.model.Trader;
+import com.sukyky.model.*;
+import org.joda.time.LocalDate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,4 +32,6 @@ public interface StockRepository {
     TradeOrder getLastTradeSince(Stock stock, Date date);
 
     Stock getStock(Long id);
+
+    RateHistory findRateHistory(Long stockId, LocalDate start, LocalDate end);
 }

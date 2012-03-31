@@ -51,6 +51,8 @@
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" />
             <element id="library" level="project" name="Maven: commons-io:commons-io:2.1" />
             <element id="library" level="project" name="Maven: joda-time:joda-time:1.6.2" />
+            <element id="library" level="project" name="Maven: jfree:jfreechart:1.0.9" />
+            <element id="library" level="project" name="Maven: jfree:jcommon:1.0.12" />
             <element id="library" level="project" name="Maven: org.springframework:spring-core:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-asm:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
@@ -641,6 +643,28 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/transaction/jta/1.1/jta-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: jfree:jcommon:1.0.12">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jcommon/1.0.12/jcommon-1.0.12.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jcommon/1.0.12/jcommon-1.0.12-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jcommon/1.0.12/jcommon-1.0.12-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: jfree:jfreechart:1.0.9">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.9/jfreechart-1.0.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.9/jfreechart-1.0.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.9/jfreechart-1.0.9-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: joda-time:joda-time:1.6.2">

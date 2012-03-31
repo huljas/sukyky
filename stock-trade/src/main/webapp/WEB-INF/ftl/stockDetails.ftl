@@ -25,8 +25,10 @@
 
     <div class="content-big">
         <h1>${stock.name}</h1>
+
         <div>
             <span class="pr">${helper.getLastPrice(stock)}</span>
+
             <div class="price-change">
                 <span class="${helper.getChangeCss(stock)}">${helper.getChange(stock)}</span>
                 <span class="${helper.getChangeCss(stock)}">${helper.getChangePercent(stock)}</span>
@@ -34,17 +36,35 @@
             <div class="statistics">
                 <table class="statistics-table">
                     <tbody>
-                    <tr><th>Year high:</th><td>${helper.getYearHigh(stock)}</td></tr>
-                    <tr><th>Year low:</th><td>${helper.getYearLow(stock)}</td></tr>
-                    <tr><th>Week high:</th><td>${helper.getWeekHigh(stock)}</td></tr>
-                    <tr><th>Week low:</th><td>${helper.getWeekLow(stock)}</td></tr>
-                    <tr><th>Days high:</th><td>${helper.getDayHigh(stock)}</td></tr>
-                    <tr><th>Days low:</th><td>${helper.getDayLow(stock)}</td></tr>
+                    <tr>
+                        <th>Year high:</th>
+                        <td>${helper.getYearHigh(stock)}</td>
+                    </tr>
+                    <tr>
+                        <th>Year low:</th>
+                        <td>${helper.getYearLow(stock)}</td>
+                    </tr>
+                    <tr>
+                        <th>Week high:</th>
+                        <td>${helper.getWeekHigh(stock)}</td>
+                    </tr>
+                    <tr>
+                        <th>Week low:</th>
+                        <td>${helper.getWeekLow(stock)}</td>
+                    </tr>
+                    <tr>
+                        <th>Days high:</th>
+                        <td>${helper.getDayHigh(stock)}</td>
+                    </tr>
+                    <tr>
+                        <th>Days low:</th>
+                        <td>${helper.getDayLow(stock)}</td>
+                    </tr>
                     </tbody>
-                </table>                
+                </table>
             </div>
         </div>
-        <div>
+        <div class="tiny-plot" data-stock-id="${stock.id}" style="width:80px;height:20px;">
         </div>
     </div>
 
@@ -55,8 +75,8 @@
     </footer>
 
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
+<script src="/js/jquery.flot.min.js"></script>
+<script src="/js/plots.js"></script>
 </body>
 </html>

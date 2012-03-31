@@ -29,7 +29,6 @@
           <file>file://$MODULE_DIR$/stock-trade/src/main/resources/mvc-context.xml</file>
           <file>file://$MODULE_DIR$/stock-trade/src/main/resources/infrastructure.xml</file>
         </fileset>
-        <fileset id="MVC mvc-dispatcher servlet context" profiles="" autodetected="true" />
       </configuration>
     </facet>
   </component>
@@ -68,6 +67,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.1" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: jfree:jfreechart:1.0.9" level="project" />
+    <orderEntry type="library" name="Maven: jfree:jcommon:1.0.12" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-asm:3.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />

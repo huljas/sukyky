@@ -3,8 +3,6 @@ package com.sukyky.setup;
 import com.sukyky.model.Stock;
 import com.sukyky.model.TradeOrder;
 import com.sukyky.model.Trader;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -15,9 +13,6 @@ import org.springframework.core.io.Resource;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 /**
  * @author huljas
@@ -51,20 +46,12 @@ public class DataInitializer {
 
     public void loadDataFile() throws IOException {
         logger.info("Loading data from file");
-        File file = tradeOrderData.getFile();
-        ZipFile zipFile = new ZipFile(file);
-        ZipEntry entry = zipFile.entries().nextElement();
-        InputStream input = zipFile.getInputStream(entry);
-        File result = new File(file.getParentFile(), entry.getName().replace(".zip", ".dump"));
-        if (!result.exists()) {
-            logger.info("Extracting " + file.getAbsolutePath() + " to " + result.getAbsolutePath());
-            OutputStream output = new FileOutputStream(result);
-            IOUtils.copy(input, output);
-            IOUtils.closeQuietly(output);
-        }
-        IOUtils.closeQuietly(input);
-        zipFile.close();
-
+        File zip = tradeOrderData.getFile();
+        
+        List<File> files = Unzip.unzip(zip, zip.getParentFile());
+        
+        File result = files.get(0);
+        
         logger.info("Loading data from " + result.getAbsolutePath());
 
         dataInitializerRepository.loadDataFile(result);
@@ -94,7 +81,7 @@ public class DataInitializer {
                 executor.submit(new Runnable() {
                     public void run() {
                         Random random = new Random();
-                        int price = random.nextInt(500 + 60000);
+                        int price = random.nextInt(60000) + 500;
                         List<TradeOrder> batch = new ArrayList<TradeOrder>();
                         for (int i = 0; i < n; i++) {
                             Trader seller = traders.get(random.nextInt(traders.size()));
@@ -103,7 +90,12 @@ public class DataInitializer {
                             order.buyer = buyer;
                             order.seller = seller;
                             order.stock = stock;
-                            order.priceA = price + random.nextInt(200) - 100;
+                            if (price < 400) {
+                                order.priceA = price + random.nextInt(200);
+                            } else {
+                                order.priceA = price + (int) random.nextGaussian() * 100;
+                            }
+                            
                             price = order.priceA;
                             long time = startL + i * diff / n;
                             LocalDateTime dateTime = new LocalDateTime(time);
