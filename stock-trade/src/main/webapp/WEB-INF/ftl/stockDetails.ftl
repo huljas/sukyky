@@ -26,45 +26,37 @@
     <div class="content-big">
         <h1>${stock.name}</h1>
 
-        <div>
+        <div class="stock-details">
             <span class="pr">${helper.getLastPrice(stock)}</span>
 
-            <div class="price-change">
-                <span class="${helper.getChangeCss(stock)}">${helper.getChange(stock)}</span>
-                <span class="${helper.getChangeCss(stock)}">${helper.getChangePercent(stock)}</span>
-            </div>
-            <div class="statistics">
-                <table class="statistics-table">
-                    <tbody>
-                    <tr>
-                        <th>Year high:</th>
-                        <td>${helper.getYearHigh(stock)}</td>
-                    </tr>
-                    <tr>
-                        <th>Year low:</th>
-                        <td>${helper.getYearLow(stock)}</td>
-                    </tr>
-                    <tr>
-                        <th>Week high:</th>
-                        <td>${helper.getWeekHigh(stock)}</td>
-                    </tr>
-                    <tr>
-                        <th>Week low:</th>
-                        <td>${helper.getWeekLow(stock)}</td>
-                    </tr>
-                    <tr>
-                        <th>Days high:</th>
-                        <td>${helper.getDayHigh(stock)}</td>
-                    </tr>
-                    <tr>
-                        <th>Days low:</th>
-                        <td>${helper.getDayLow(stock)}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="${helper.getChangeCss(stock)}">
+                <span>${helper.getChange(stock)}</span>
+                <span>(${helper.getChangePercent(stock)} %)</span>
             </div>
         </div>
-        <div class="tiny-plot" data-stock-id="${stock.id}" style="width:80px;height:20px;">
+        <div class="statistics">
+            <table>
+                <tbody>
+                <tr>
+                    <th>Range:</th>
+                    <td>${helper.getRange(stock)}</td>
+                </tr>
+                <tr>
+                    <th>52 week:</th>
+                    <td>${helper.getYearRange(stock)}</td>
+                </tr>
+                <tr>
+                    <th>Open:</th>
+                    <td>${helper.getOpeningPrice(stock)}</td>
+                </tr>
+                <tr>
+                    <th>Close:</th>
+                    <td>${helper.getClosingPrice(stock)}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="plot" data-stock-id="${stock.id}" style="width:400px;height:225px;">
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 body {
     color:#000000;
-    font-family:Arial, sans-serif;
-    font-size:110%;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
 }
 
 
@@ -14,3 +14,34 @@ a {
     outline-style:none;
     outline-width:initial;
 }
+
+th {
+    color: #000;
+    padding: 0.3em 0.7em;
+    text-align: left;
+}
+
+td {
+    padding: 0.5em 0.3em;
+}
+
+
+.stock-details span.pr {
+    font-size: 250%;
+    font-weight: bold;
+}
+
+.stock-details span {
+    font-size: 140%;
+}
+
+.stock-details .up {
+    color: #000;
+}
+
+.stock-details .down {
+    color: #e02222;
+}
+
+
+

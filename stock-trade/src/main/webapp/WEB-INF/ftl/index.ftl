@@ -24,9 +24,9 @@
 <div class="container">
 
     <div class="content-big">
-        <table>
+        <table border="0">
             <thead>
-            <tr><th>Stock</th><th>Price</th><th>Change</th><th>Chg %</th></tr>
+            <tr><th>Stock</th><th>Price</th><th>Change</th><th>Chg %</th><th>History</th></tr>
             </thead>
             <tbody>
             <#list stocks as stock>
@@ -35,7 +35,7 @@
                     <td>${helper.getLastPrice(stock)}</td>
                     <td>${helper.getChange(stock)}</td>
                     <td>${helper.getChangePercent(stock)}</td>
-                    <td><div class="tiny-plot" data-stock-id="${stock.id}" style="height:20px;width:80px;"></div></td>
+                    <td><div class="plot" data-stock-id="${stock.id}" style="height:20px;width:120px;"></div></td>
                 </tr>
             </#list>
             </tbody>

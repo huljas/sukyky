@@ -29,9 +29,14 @@ public interface StockRepository {
 
     TradeOrder getLastTrade(Stock stock);
 
-    TradeOrder getLastTradeSince(Stock stock, Date date);
+    TradeOrder getLastTradeBefore(Stock stock, Date date);
+
+    TradeOrder getFirstTradeAfter(Stock stock, Date since);
 
     Stock getStock(Long id);
 
     RateHistory findRateHistory(Long stockId, LocalDate start, LocalDate end);
+
+    int[] getMinMax(Stock stock, int days);
+
 }

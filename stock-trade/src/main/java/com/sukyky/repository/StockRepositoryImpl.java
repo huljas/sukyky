@@ -2,6 +2,7 @@ package com.sukyky.repository;
 
 import com.sukyky.model.*;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -110,8 +111,15 @@ public class StockRepositoryImpl implements StockRepository {
         if (prices.isEmpty()) return null; else return prices.get(0);
     }
 
-    public TradeOrder getLastTradeSince(Stock stock, Date since) {
+    public TradeOrder getLastTradeBefore(Stock stock, Date since) {
         List<TradeOrder> prices = em.createQuery("select o from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null and o.time < :since order by o.time desc", TradeOrder.class)
+                .setParameter("stock", stock).setParameter("since", since)
+                .setMaxResults(1).getResultList();
+        if (prices.isEmpty()) return null; else return prices.get(0);
+    }
+
+    public TradeOrder getFirstTradeAfter(Stock stock, Date since) {
+        List<TradeOrder> prices = em.createQuery("select o from TradeOrder o where o.stock = :stock and o.buyer is not null and o.seller is not null and o.time > :since order by o.time asc", TradeOrder.class)
                 .setParameter("stock", stock).setParameter("since", since)
                 .setMaxResults(1).getResultList();
         if (prices.isEmpty()) return null; else return prices.get(0);
@@ -134,5 +142,23 @@ public class StockRepositoryImpl implements StockRepository {
                 .setParameter("end", end.toDateTimeAtStartOfDay().toDate())
                 .getResultList();
         return new RateHistory(results);
+    }
+
+    public int[] getMinMax(Stock stock, int days) {
+        TradeOrder order = getLastTrade(stock);
+        Date end = order.time;
+        Date start = new LocalDateTime(end).minusDays(days).toDateTime().toDate();
+        List<Object[]> results = em.createQuery("select min(o.priceA), max(o.priceA) " +
+                "from TradeOrder o " +
+                "where o.stock = :stock " +
+                "and o.buyer is not null " +
+                "and o.seller is not null " +
+                "and o.time >= :start " +
+                "and o.time <= :end")
+                .setParameter("stock", stock).setParameter("start", start).setParameter("end", end).getResultList();
+        Object[] minMax = results.get(0);
+        Integer min = (Integer) minMax[0];
+        Integer max = (Integer) minMax[1];
+        return new int[]{min, max};
     }
 }

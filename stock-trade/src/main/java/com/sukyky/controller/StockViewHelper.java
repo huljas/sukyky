@@ -29,46 +29,46 @@ public class StockViewHelper {
     public String getChange(Stock stock) {
         TradeOrder last = stockRepository.getLastTrade(stock);
         Date since = new LocalDate(last.time).toDateTimeAtStartOfDay().toDate();
-        TradeOrder previous = stockRepository.getLastTradeSince(stock, since);
+        TradeOrder previous = stockRepository.getLastTradeBefore(stock, since);
         return String.format("%.2f", (last.priceA - previous.priceA) / 100f);
     }
     
     public String getChangePercent(Stock stock) {
         TradeOrder last = stockRepository.getLastTrade(stock);
         Date since = new LocalDate(last.time).toDateTimeAtStartOfDay().toDate();
-        TradeOrder previous = stockRepository.getLastTradeSince(stock, since);
+        TradeOrder previous = stockRepository.getLastTradeBefore(stock, since);
         return String.format("%.2f", (last.priceA - previous.priceA) * 100f / previous.priceA);
     }
     
     public String getChangeCss(Stock stock) {
-        if (getLastPrice(stock).startsWith("-")) {
+        if (getChange(stock).startsWith("-")) {
             return "down";
         } else {
             return "up";
         }
     }
     
-    public String getYearHigh(Stock stock) {
-        return "yh";    
+    public String getRange(Stock stock) {
+        int[] range = stockRepository.getMinMax(stock, 1);
+        return String.format("%.2f - %.2f", range[0]/(float)100, range[1]/(float)100);
     }
     
-    public String getYearLow(Stock stock) {
-        return "yl";
+    public String getYearRange(Stock stock) {
+        int[] range = stockRepository.getMinMax(stock, 52);
+        return String.format("%.2f - %.2f", range[0]/(float)100, range[1]/(float)100);
     }
     
-    public String getWeekHigh(Stock stock) {
-        return "wh";
+    public String getOpeningPrice(Stock stock) {
+        TradeOrder last = stockRepository.getLastTrade(stock);
+        Date since = new LocalDate(last.time).toDateTimeAtStartOfDay().toDate();
+        TradeOrder opening = stockRepository.getFirstTradeAfter(stock, since);
+        return String.format("%.2f", last.priceA/(float)100);
     }
     
-    public String getWeekLow(Stock stock) {
-        return "wl";
-    }
-    
-    public String getDayHigh(Stock stock) {
-        return "dh";
-    }
-    
-    public String getDayLow(Stock stock) {
-        return "dl";
+    public String getClosingPrice(Stock stock) {
+        TradeOrder last = stockRepository.getLastTrade(stock);
+        Date since = new LocalDate(last.time).toDateTimeAtStartOfDay().toDate();
+        TradeOrder previous = stockRepository.getLastTradeBefore(stock, since);
+        return String.format("%.2f", previous.priceA/(float)100);
     }
 }

@@ -18,12 +18,22 @@ public class Trends {
     @Autowired
     private StockRepository stockRepository;
 
-    @RequestMapping("/trends/{id}/small")
+    @RequestMapping("/trends/{id}/monthly")
     @ResponseBody
-    public RateHistory smallTrendImage(@PathVariable("id") Long id) {
+    public RateHistory monthlyTrend(@PathVariable("id") Long id) {
         LocalDate start = new LocalDate();
         LocalDate end = start.minusDays(31);
         RateHistory history = stockRepository.findRateHistory(id, start, end);
         return history;
     }
+
+    @RequestMapping("/trends/{id}/yearly")
+    @ResponseBody
+    public RateHistory yearlyTrend(@PathVariable("id") Long id) {
+        LocalDate start = new LocalDate();
+        LocalDate end = start.minusDays(365);
+        RateHistory history = stockRepository.findRateHistory(id, start, end);
+        return history;
+    }
+
 }
