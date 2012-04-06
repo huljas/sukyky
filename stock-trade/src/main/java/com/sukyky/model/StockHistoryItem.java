@@ -5,15 +5,15 @@ import java.util.Date;
 /**
  * @author huljas
  */
-public class RateHistoryItem {
+public class StockHistoryItem {
 
     public int price;
     public Date time;
 
-    public RateHistoryItem() {
+    public StockHistoryItem() {
     }
 
-    public RateHistoryItem(int price, Date time) {
+    public StockHistoryItem(int price, Date time) {
         this.price = price;
         this.time = time;
     }

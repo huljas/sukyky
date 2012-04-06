@@ -27,11 +27,11 @@
         <h1>${stock.name}</h1>
 
         <div class="stock-details">
-            <span class="pr">${helper.getLastPrice(stock)}</span>
+            <span class="pr">${stock.formatCurrency(stock.getLastPrice())}</span>
 
-            <div class="${helper.getChangeCss(stock)}">
-                <span>${helper.getChange(stock)}</span>
-                <span>(${helper.getChangePercent(stock)} %)</span>
+            <div class="${stock.getChangeDirection()}">
+                <span>${stock.formatCurrency(stock.getChange())}</span>
+                <span>(${stock.formatPercentage(stock.getChangePercentage())})</span>
             </div>
         </div>
         <div class="statistics">
@@ -39,19 +39,19 @@
                 <tbody>
                 <tr>
                     <th>Range:</th>
-                    <td>${helper.getRange(stock)}</td>
+                    <td>${stock.formatCurrency(stock.getDailyMin())} - ${stock.formatCurrency(stock.getDailyMin())}</td>
                 </tr>
                 <tr>
                     <th>52 week:</th>
-                    <td>${helper.getYearRange(stock)}</td>
+                    <td>${stock.formatCurrency(stock.getYearlyMin())} - ${stock.formatCurrency(stock.getYearlyMax())}</td>
                 </tr>
                 <tr>
                     <th>Open:</th>
-                    <td>${helper.getOpeningPrice(stock)}</td>
+                    <td>${stock.formatCurrency(stock.getOpeningPrice())}</td>
                 </tr>
                 <tr>
                     <th>Close:</th>
-                    <td>${helper.getClosingPrice(stock)}</td>
+                    <td>${stock.formatCurrency(stock.getClosingPrice())}</td>
                 </tr>
                 </tbody>
             </table>

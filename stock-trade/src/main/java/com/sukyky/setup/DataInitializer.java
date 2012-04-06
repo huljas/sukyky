@@ -1,8 +1,7 @@
 package com.sukyky.setup;
 
 import com.sukyky.model.Stock;
-import com.sukyky.model.TradeOrder;
-import com.sukyky.model.Trader;
+import com.sukyky.model.Trade;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -73,7 +72,6 @@ public class DataInitializer {
         logger.info("Populating trade data!");
         if (!dataInitializerRepository.hasTradeOrders()) {
             final List<Stock> stocks = dataInitializerRepository.getStocks();
-            final List<Trader> traders = dataInitializerRepository.getTraders();
             final int n = 100000;
             long time = System.currentTimeMillis();
             ExecutorService executor = Executors.newFixedThreadPool(8);
@@ -82,21 +80,17 @@ public class DataInitializer {
                     public void run() {
                         Random random = new Random();
                         int price = random.nextInt(60000) + 500;
-                        List<TradeOrder> batch = new ArrayList<TradeOrder>();
+                        List<Trade> batch = new ArrayList<Trade>();
                         for (int i = 0; i < n; i++) {
-                            Trader seller = traders.get(random.nextInt(traders.size()));
-                            Trader buyer = traders.get(random.nextInt(traders.size()));
-                            TradeOrder order = new TradeOrder();
-                            order.buyer = buyer;
-                            order.seller = seller;
+                            Trade order = new Trade();
                             order.stock = stock;
                             if (price < 400) {
-                                order.priceA = price + random.nextInt(200);
+                                order.price = price + random.nextInt(200);
                             } else {
-                                order.priceA = price + (int) random.nextGaussian() * 100;
+                                order.price = price + (int) random.nextGaussian() * 100;
                             }
                             
-                            price = order.priceA;
+                            price = order.price;
                             long time = startL + i * diff / n;
                             LocalDateTime dateTime = new LocalDateTime(time);
 
@@ -117,7 +111,7 @@ public class DataInitializer {
                             batch.add(order);
                             if (batch.size() >= 1000) {
                                 dataInitializerRepository.batchInsert(batch);
-                                batch = new ArrayList<TradeOrder>();
+                                batch = new ArrayList<Trade>();
                                 System.out.print(".");
                             }
                         }

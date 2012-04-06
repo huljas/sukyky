@@ -32,9 +32,9 @@
             <#list stocks as stock>
                 <tr>
                     <td><a href="/stock/${stock.id}">${stock.name}</a></td>
-                    <td>${helper.getLastPrice(stock)}</td>
-                    <td>${helper.getChange(stock)}</td>
-                    <td>${helper.getChangePercent(stock)}</td>
+                    <td>${stock.formatCurrency(stock.getLastPrice())}</td>
+                    <td>${stock.formatCurrency(stock.getChange())}</td>
+                    <td>${stock.formatPercentage(stock.getChangePercentage())}</td>
                     <td><div class="plot" data-stock-id="${stock.id}" style="height:20px;width:120px;"></div></td>
                 </tr>
             </#list>

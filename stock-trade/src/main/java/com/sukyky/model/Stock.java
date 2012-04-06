@@ -17,7 +17,7 @@ public class Stock {
     public String name;
 
     @OneToMany(mappedBy = "stock")
-    public Set<TradeOrder> tradeOrders = new HashSet<TradeOrder>();
+    public Set<Trade> trades = new HashSet<Trade>();
 
     public Stock(String name) {
         this.name = name;
@@ -42,12 +42,12 @@ public class Stock {
         this.name = name;
     }
 
-    public Set<TradeOrder> getTradeOrders() {
-        return tradeOrders;
+    public Set<Trade> getTrades() {
+        return trades;
     }
 
-    public void setTradeOrders(Set<TradeOrder> tradeOrders) {
-        this.tradeOrders = tradeOrders;
+    public void setTrades(Set<Trade> trades) {
+        this.trades = trades;
     }
 
     @Override

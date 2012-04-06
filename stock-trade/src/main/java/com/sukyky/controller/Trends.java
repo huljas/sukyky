@@ -1,6 +1,6 @@
 package com.sukyky.controller;
 
-import com.sukyky.model.RateHistory;
+import com.sukyky.model.StockHistory;
 import com.sukyky.repository.StockRepository;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,19 @@ public class Trends {
 
     @RequestMapping("/trends/{id}/monthly")
     @ResponseBody
-    public RateHistory monthlyTrend(@PathVariable("id") Long id) {
+    public StockHistory monthlyTrend(@PathVariable("id") Long id) {
         LocalDate start = new LocalDate();
         LocalDate end = start.minusDays(31);
-        RateHistory history = stockRepository.findRateHistory(id, start, end);
+        StockHistory history = stockRepository.findHistory(id, start, end);
         return history;
     }
 
     @RequestMapping("/trends/{id}/yearly")
     @ResponseBody
-    public RateHistory yearlyTrend(@PathVariable("id") Long id) {
+    public StockHistory yearlyTrend(@PathVariable("id") Long id) {
         LocalDate start = new LocalDate();
         LocalDate end = start.minusDays(365);
-        RateHistory history = stockRepository.findRateHistory(id, start, end);
+        StockHistory history = stockRepository.findHistory(id, start, end);
         return history;
     }
 

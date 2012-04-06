@@ -7,21 +7,16 @@ import java.util.Date;
  * @author huljas
  */
 @Entity
-@Table(name="trade_order")
-public class TradeOrder {
+public class Trade {
 
     @Id @GeneratedValue
     public Long id;
     
-    public int priceA;
+    public int price;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     public Date time;
 
-    @ManyToOne
-    public Trader seller;
-    @ManyToOne
-    public Trader buyer;
     @ManyToOne
     public Stock stock;
 }

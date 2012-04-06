@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author huljas
  */
-public class RateHistory {
+public class StockHistory {
 
     public List<Integer> rates = new ArrayList<Integer>();
     public Date start;
@@ -15,10 +15,10 @@ public class RateHistory {
     public int max;
     public int min;
 
-    public RateHistory() {
+    public StockHistory() {
     }
 
-    public RateHistory(List<Object[]> results) {
+    public StockHistory(List<Object[]> results) {
         for (Object[] oa : results) {
             Number number = (Number) oa[0];
             int rate = number.intValue();
