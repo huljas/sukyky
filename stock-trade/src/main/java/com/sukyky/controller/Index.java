@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -31,7 +33,26 @@ public class Index {
             stocks.add(new StockView(stock, stockRepository));
         }
 
-        model.addAttribute("stocks", stocks);
+        List<StockView> downStocks = new ArrayList<StockView>(stocks);
+        Collections.sort(downStocks, new Comparator<StockView>() {
+            public int compare(StockView o1, StockView o2) {
+                return new Float(o1.getChangePercentage()).compareTo(o2.getChangePercentage());
+            }
+        });
+        downStocks = downStocks.subList(0, 5);
+
+        List<StockView> upStocks = new ArrayList<StockView>(stocks);
+        Collections.sort(upStocks, new Comparator<StockView>() {
+            public int compare(StockView o1, StockView o2) {
+                return new Float(o2.getChangePercentage()).compareTo(o1.getChangePercentage());
+            }
+        });
+        upStocks = upStocks.subList(0, 5);
+
+        model.addAttribute("downStocks", downStocks);
+        model.addAttribute("upStocks", upStocks);
+        model.addAttribute("allStocks", stocks);
+
         return "index";
 	}
 

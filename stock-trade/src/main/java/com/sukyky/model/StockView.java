@@ -2,6 +2,8 @@ package com.sukyky.model;
 
 import com.sukyky.repository.StockRepository;
 
+import java.util.Date;
+
 /**
  * Helper class user for rendering the stock data in the template.
  * @author huljas
@@ -29,6 +31,10 @@ public class StockView {
         return stockRepository.getLastPrice(stock);
     }
 
+    public Date getLastTime() {
+        return stockRepository.getLastTime(stock);
+    }
+
     public int getChange() {
         return getLastPrice() - getClosingPrice();
     }
@@ -43,6 +49,10 @@ public class StockView {
 
     public String formatPercentage(float value) {
         return String.format("%.2f", value*100) + " %";
+    }
+
+    public String formatTime(Date time) {
+        return String.format("%tD %tT", time, time);
     }
 
     public Long getId() {

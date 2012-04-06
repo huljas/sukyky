@@ -79,6 +79,10 @@ public class StockRepositoryImpl implements StockRepository {
         return getMax(stock, 7*52);
     }
 
+    public Date getLastTime(Stock stock) {
+        return getLastTrade(stock).time;
+    }
+
     // Helper queries
 
     protected Trade getLastTrade(Stock stock) {

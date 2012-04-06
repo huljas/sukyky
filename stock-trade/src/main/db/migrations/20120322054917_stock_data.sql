@@ -1,6 +1,6 @@
 -- Insert stocks
 insert  into stock(id,name) values (1,'Apple Inc.');
-insert  into stock(id,name) values (2,'Hewlwtt-Packard Company');
+insert  into stock(id,name) values (2,'Hewlett-Packard Company');
 insert  into stock(id,name) values (3,'Dell Inc.');
 insert  into stock(id,name) values (4,'Lenovo Group Limited');
 insert  into stock(id,name) values (5,'Oracle Corporation');

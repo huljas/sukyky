@@ -30,4 +30,6 @@ public interface StockRepository {
     int getYearlyMin(Stock stock);
 
     int getYearlyMax(Stock stock);
+
+    Date getLastTime(Stock stock);
 }
