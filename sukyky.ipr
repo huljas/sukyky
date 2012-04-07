@@ -53,6 +53,7 @@
             <element id="library" level="project" name="Maven: joda-time:joda-time:1.6.2" />
             <element id="library" level="project" name="Maven: jfree:jfreechart:1.0.9" />
             <element id="library" level="project" name="Maven: jfree:jcommon:1.0.12" />
+            <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.5.1" />
             <element id="library" level="project" name="Maven: org.springframework:spring-core:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-asm:3.1.0.RELEASE" />
             <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
@@ -709,6 +710,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: net.sf.ehcache:ehcache-core:2.5.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.5.1/ehcache-core-2.5.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.5.1/ehcache-core-2.5.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.5.1/ehcache-core-2.5.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.aspectj:aspectjrt:1.6.8">

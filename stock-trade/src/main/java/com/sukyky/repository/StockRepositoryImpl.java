@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -64,19 +65,27 @@ public class StockRepositoryImpl implements StockRepository {
     }
 
     public int getDailyMin(Stock stock) {
-        return getMin(stock, 1);
+        Trade order = getLastTrade(stock);
+        Date start = minusDays(order.time, 1);
+        return getMin(stock, start);
     }
 
     public int getDailyMax(Stock stock) {
-        return getMax(stock, 1);
+        Trade order = getLastTrade(stock);
+        Date start = minusDays(order.time, 1);
+        return getMax(stock, start);
     }
 
     public int getYearlyMin(Stock stock) {
-        return getMin(stock, 7*52);
+        Trade order = getLastTrade(stock);
+        Date start = minusDays(order.time, 365);
+        return getMin(stock, start);
     }
 
     public int getYearlyMax(Stock stock) {
-        return getMax(stock, 7*52);
+        Trade order = getLastTrade(stock);
+        Date start = minusDays(order.time, 365);
+        return getMax(stock, start);
     }
 
     public Date getLastTime(Stock stock) {
@@ -106,27 +115,32 @@ public class StockRepositoryImpl implements StockRepository {
     }
 
 
-    protected int getMin(Stock stock, int days) {
-        Trade order = getLastTrade(stock);
-        Date end = order.time;
-        Date start = new LocalDateTime(end).minusDays(days).toDateTime().toDate();
-        return em.createQuery("select min(o.price) " +
+    protected int getMin(Stock stock, Date start) {
+        Integer result = em.createQuery("select min(o.price) " +
                 "from Trade o " +
                 "where o.stock = :stock " +
-                "and o.time >= :start " +
-                "and o.time <= :end", Integer.class)
-                .setParameter("stock", stock).setParameter("start", start).setParameter("end", end).getSingleResult();
+                "and o.time >= :start", Integer.class)
+                .setParameter("stock", stock).setParameter("start", start).getSingleResult();
+        return result;
     }
 
-    protected int getMax(Stock stock, int days) {
-        Trade order = getLastTrade(stock);
-        Date end = order.time;
-        Date start = new LocalDateTime(end).minusDays(days).toDateTime().toDate();
-        return em.createQuery("select max(o.price) " +
+    protected int getMax(Stock stock, Date start) {
+        Integer result = em.createQuery("select max(o.price) " +
                 "from Trade o " +
                 "where o.stock = :stock " +
-                "and o.time >= :start " +
-                "and o.time <= :end", Integer.class)
-                .setParameter("stock", stock).setParameter("start", start).setParameter("end", end).getSingleResult();
+                "and o.time >= :start", Integer.class)
+                .setParameter("stock", stock).setParameter("start", start).getSingleResult();
+        return result;
+    }
+
+    public static Date minusDays(Date now, int days) {
+        Calendar last = Calendar.getInstance();
+        last.setTime(now);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, last.get(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.MONTH, last.get(Calendar.MONTH));
+        calendar.set(Calendar.YEAR, last.get(Calendar.YEAR));
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        return calendar.getTime();
     }
 }
