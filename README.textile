@@ -6,25 +6,25 @@ h2. Setting up
 
 The training project requires a local MySQL instance.
 
-h4. Checkout the project sources
+h5. 1) Clone the project
 
 bc. git clone git@github.com:huljas/sukyky.git
 
-h4. Build the project with maven
+h5. 2) Build it
 
 bc. cd sukyky
 mvn install
 
-h4. Configure the database connection
+h5. 3) Configure database connection
 
 bc. vi stock-trade/src/main/resources/db.properties
 
-h4. Create database
+h5. 4) Create database
 
 bc. cd stock-trade
 mvn db-migration:create
 
-h4. Start the example application
+h5. 5) Start the training application
 
 bc. mvn jetty:run
 ...
