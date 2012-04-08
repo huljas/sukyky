@@ -16,6 +16,7 @@ bc. cd sukyky
 mvn install
 
 h4. Configure the database connection
+
 bc. vi stock-trade/src/main/resources/db.properties
 
 h4. Create database
