@@ -1,5 +1,6 @@
 package com.sukyky.repository;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.*;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -140,7 +141,7 @@ public class StockRepositoryImpl implements StockRepository {
         calendar.set(Calendar.DAY_OF_MONTH, last.get(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.MONTH, last.get(Calendar.MONTH));
         calendar.set(Calendar.YEAR, last.get(Calendar.YEAR));
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        calendar.add(Calendar.DAY_OF_MONTH, -1*days);
         return calendar.getTime();
     }
 }

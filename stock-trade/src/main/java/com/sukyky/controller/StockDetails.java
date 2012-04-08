@@ -1,5 +1,6 @@
 package com.sukyky.controller;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockView;
 import com.sukyky.repository.StockRepository;
@@ -9,10 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * @author huljas
- */
 @Controller
+@Jamon("Controller")
 public class StockDetails {
 
     @Autowired

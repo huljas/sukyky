@@ -1,5 +1,6 @@
 package com.sukyky.controller;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockView;
 import com.sukyky.repository.StockRepository;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Jamon("Controller")
 @Controller
 public class Index {
 	

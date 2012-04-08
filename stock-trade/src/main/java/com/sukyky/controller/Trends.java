@@ -1,5 +1,6 @@
 package com.sukyky.controller;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.StockHistory;
 import com.sukyky.repository.StockRepository;
 import org.joda.time.LocalDate;
@@ -9,10 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * @author huljas
- */
 @Controller
+@Jamon("Controller")
 public class Trends {
 
     @Autowired
