@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author huljas
- */
 public class StockHistory {
 
     public List<Integer> rates = new ArrayList<Integer>();

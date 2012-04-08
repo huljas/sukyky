@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author huljas
- */
 @Entity
 public class Stock {
 

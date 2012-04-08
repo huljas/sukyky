@@ -6,7 +6,6 @@ import java.util.Date;
 
 /**
  * Helper class user for rendering the stock data in the template.
- * @author huljas
  */
 public class StockView {
 

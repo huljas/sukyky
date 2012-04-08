@@ -1,7 +1,7 @@
 $(function () {
     $(".plot").each(function () {
         var stockId = $(this).data("stock-id");
-        var jqxhr = $.get('/trends/' + stockId + '/yearly');
+        var jqxhr = $.get('/trends/' + stockId + '/monthly');
         jqxhr.success(function (data) {
             console.log("success", data);
             var d = [];

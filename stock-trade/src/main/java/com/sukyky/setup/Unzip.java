@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-/**
- * Simple unzip utility.
- *
- * @author huljas
- */
 public class Unzip {
 
     /**

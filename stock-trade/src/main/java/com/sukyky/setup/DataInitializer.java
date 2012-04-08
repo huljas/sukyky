@@ -13,9 +13,6 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-/**
- * @author huljas
- */
 public class DataInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);

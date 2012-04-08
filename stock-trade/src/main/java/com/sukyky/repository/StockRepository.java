@@ -6,9 +6,6 @@ import org.joda.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author huljas
- */
 public interface StockRepository {
 
     public List<Stock> findAllStocks();

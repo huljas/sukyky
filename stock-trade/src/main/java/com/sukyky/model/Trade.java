@@ -3,9 +3,6 @@ package com.sukyky.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @author huljas
- */
 @Entity
 public class Trade {
 

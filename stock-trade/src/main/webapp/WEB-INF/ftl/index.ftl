@@ -64,7 +64,7 @@
                 <th>Price</th>
                 <th>Change</th>
                 <th>Chg %</th>
-                <th>History</th>
+                <th>Trend 1m</th>
             </tr>
             </thead>
             <tbody>

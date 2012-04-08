@@ -1,9 +1,7 @@
 package com.sukyky.repository;
 
-import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.*;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +12,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author huljas
- */
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class StockRepositoryImpl implements StockRepository {
 

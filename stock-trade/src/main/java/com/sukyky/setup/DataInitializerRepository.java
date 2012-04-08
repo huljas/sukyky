@@ -15,9 +15,6 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.util.*;
 
-/**
- * @author huljas
- */
 @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class DataInitializerRepository {
 
