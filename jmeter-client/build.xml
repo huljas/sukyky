@@ -1,4 +1,4 @@
-<project name="jmeter-client" default="install" basedir=".">
+<project name="jmeter-client" default="jmeter" basedir=".">
 
     <property name="jmeter.zip" value="target/install/jmeter.zip"/>
     <property name="jmeter.plugins.zip" value="target/install/JMeterPLugins-0.5.1.zip"/>
@@ -8,13 +8,18 @@
         <delete dir="target/jmeter"/>
     </target>
 
-    <target name="download">
+    <target name="check-installation" unless="installation.present">
+        <available file="target/apache-jmeter-2.6/bin/jmeter.bat" property="installation.present"/>
+        <echo message="found installation ${installation.present}"/>
+    </target>
+
+    <target name="download" depends="check-installation" unless="installation.present">
         <mkdir dir="${basedir}/target/install"/>
         <get src="http://jmeter-plugins.googlecode.com/files/JMeterPlugins-0.5.1.zip" dest="target/install/JMeterPLugins-0.5.1.zip"/>
         <get src="http://www.nic.funet.fi/pub/mirrors/apache.org//jmeter/binaries/apache-jmeter-2.6.zip" dest="target/install/jmeter.zip"/>
     </target>
 
-    <target name="install">
+    <target name="install" depends="check-installation" unless="installation.present">
         <unzip src="${jmeter.zip}" dest="target"/>
         <unzip src="${jmeter.plugins.zip}" dest="target/jmeter-plugins"/>
         <copy file="target/jmeter-plugins/JMeterPlugins.jar" tofile="target/apache-jmeter-2.6/lib/ext/JMeterPlugins.jar"/>

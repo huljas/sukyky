@@ -30,6 +30,79 @@ bc. mvn jetty:run
 ...
 [INFO] Started Jetty Server
 
+h5. 6) Open web browser
+
+bc. http://localhost:8080/
+(might take a while ...)
+
+h2. Tools
+
+h3. JMeter test client
+
+h4. Starting up
+
+bc. cd jmeter-client
+ant jmeter
+
+_This installs and starts the client._
+
+Next select File - Open and open the file in
+
+bc. jmeter-client/src/test/jmeter/Basic.xml
+
+h3. Jamon monitoring API
+
+h4. Collecting data
+
+The data can be collected with the following code:
+
+bc. Monitor monitor = MonitorFactory.start("Label name");
+try {
+// code to monitor
+} finally {
+  monitor.stop();
+}
+
+To simplify the *jamon-monitor* project contains a <code>@Jamon</code> annotation which can be used to mark a class or method for monitoring.
+
+h4. Monitoring
+
+The example application comes with a Jamon admin page in address:
+
+bc. http://localhost:8080/jamon/admin
+
+h3. Java SE tools
+
+h4. jconsole
+
+"Java monitoring and management console":http://docs.oracle.com/javase/6/docs/technotes/tools/share/jconsole.html
+
+h4. jmap
+
+"Memory map":http://docs.oracle.com/javase/6/docs/technotes/tools/share/jmap.html
+
+Checking heap histogram
+
+bc. jmat -histo:live <pid>
+
+h2. Exercises
+
+h3. 1. Slow front page
+
+Find out why the loading the front page takes so long. Try to fix the problem.
+
+* Measure first the current performance
+* Add monitoring to get more detailed information
+* Measure again after each change
+
+h3. 2. Testing with multiple threads
+
+
+
+h3. 3. Stability problem
+
+
+
 
 
 
