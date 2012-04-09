@@ -95,11 +95,12 @@ h2. Exercises
 
 h3. 1. Slow front page
 
-Find out why the loading the front page takes so long. Try to fix the problem.
+Find out why the loading the front page takes so long. Try to fix the page to load to take *less than 100ms*.
 
 * Always measure first!
 * Add Jamon monitoring to get better understanding of the problem
-* Rerun your tests after each change.
+* Rerun your tests after each change
+* Remember that *understanding the problem* is the first step in fixing it
 
 _Remember that the *trade* table has 2M rows of data, maybe the problem is somehow related to that?_
 
