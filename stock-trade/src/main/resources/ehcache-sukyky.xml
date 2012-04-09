@@ -3,6 +3,6 @@
 
     <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000" diskPersistent="false" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU" statistics="false"/>
 
-    <cache name="sampleCache1" maxElementsInMemory="10000" maxElementsOnDisk="1000" eternal="false" overflowToDisk="false" diskSpoolBufferSizeMB="20" timeToIdleSeconds="300" timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU" transactionalMode="off"/>
+    <cache name="stockRepository" maxElementsInMemory="1000000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" transactionalMode="off"/>
 
 </ehcache>

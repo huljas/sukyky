@@ -3,7 +3,7 @@ package com.sukyky.controller;
 import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockView;
-import com.sukyky.repository.StockRepository;
+import com.sukyky.repository.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +23,16 @@ public class Index {
     private static final Logger logger = LoggerFactory.getLogger(Index.class);
     
     @Autowired
-    private StockRepository stockRepository;
+    private StockService stockService;
 
     @RequestMapping("/")
 	public String show(Model model) {
-        List<Stock> list = stockRepository.findAllStocks();
+        List<Stock> list = stockService.findAllStocks();
 
         List<StockView> stocks = new ArrayList<StockView>();
 
         for (Stock stock : list) {
-            stocks.add(new StockView(stock, stockRepository));
+            stocks.add(new StockView(stock, stockService));
         }
 
         List<StockView> downStocks = new ArrayList<StockView>(stocks);

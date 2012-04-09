@@ -3,7 +3,7 @@ package com.sukyky.controller;
 import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockView;
-import com.sukyky.repository.StockRepository;
+import com.sukyky.repository.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StockDetails {
 
     @Autowired
-    private StockRepository stockRepository;
+    private StockService stockService;
 
     @RequestMapping("/stock/{id}")
     public String stockPage(@PathVariable("id") Long id, Model model) {
-        Stock stock = stockRepository.getStock(id);
-        model.addAttribute("stock", new StockView(stock, stockRepository));
+        Stock stock = stockService.getStock(id);
+        model.addAttribute("stock", new StockView(stock, stockService));
         return "stockDetails";
     }
     
