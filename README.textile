@@ -39,6 +39,10 @@ h2. Tools
 
 h3. JMeter test client
 
+"JMeter":http://jmeter.apache.org/
+
+"Jmeter-plugins":http://code.google.com/p/jmeter-plugins/
+
 h4. Starting up
 
 bc. cd jmeter-client
@@ -51,6 +55,8 @@ Next select File - Open and open the file in
 bc. jmeter-client/src/test/jmeter/Basic.xml
 
 h3. Jamon monitoring API
+
+"Jamon Api":http://jamonapi.sourceforge.net/
 
 h4. Collecting data
 
@@ -91,9 +97,11 @@ h3. 1. Slow front page
 
 Find out why the loading the front page takes so long. Try to fix the problem.
 
-* Measure first the current performance
-* Add monitoring to get more detailed information
-* Measure again after each change
+* Always measure first!
+* Add Jamon monitoring to get better understanding of the problem
+* Rerun your tests after each change.
+
+_Remember that the *trade* table has 2M rows of data, maybe the problem is somehow related to that?_
 
 h3. 2. Testing with multiple threads
 
