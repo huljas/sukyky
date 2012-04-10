@@ -1,10 +1,12 @@
 package com.sukyky.repository;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockHistory;
 import com.sukyky.model.Trade;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@Jamon("Service")
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class StockServiceBean implements StockService {
@@ -29,10 +32,6 @@ public class StockServiceBean implements StockService {
 
     public Stock getStock(Long id) {
         return stockRepository.getStock(id);
-    }
-
-    public StockHistory findHistory(Long id, LocalDate start, LocalDate end) {
-        return stockRepository.findHistory(id, start.toDateTimeAtStartOfDay().toDate(), end.toDateMidnight().toDate());
     }
 
     public int getOpeningPrice(Stock stock) {
@@ -51,6 +50,14 @@ public class StockServiceBean implements StockService {
 
     public int getLastPrice(Stock stock) {
         return stockRepository.getLastTrade(stock.id).price;
+    }
+
+    @Cacheable("stockService")
+    public StockHistory findHistory(Long id, Date since) {
+        LocalDate end = new LocalDate();
+        LocalDate start = new LocalDate(since);
+        Object[] history = stockRepository.findHistory(id, start.toDateTimeAtStartOfDay().toDate(), end.toDateTimeAtStartOfDay().toDate());
+        return new StockHistory(history);
     }
 
     public int getDailyMin(Stock stock) {

@@ -12,7 +12,7 @@ public interface StockService {
 
     Stock getStock(Long id);
 
-    StockHistory findHistory(Long stockId, LocalDate start, LocalDate end);
+    StockHistory findHistory(Long stockId, Date since);
 
     int getOpeningPrice(Stock stock);
 

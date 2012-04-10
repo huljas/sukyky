@@ -15,7 +15,7 @@ public interface StockRepository {
 
     Stock getStock(Long id);
 
-    StockHistory findHistory(Long id, Date start, Date end);
+    Object[] findHistory(Long id, Date start, Date end);
 
     Trade getLastTrade(Long id);
 

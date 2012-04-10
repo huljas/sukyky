@@ -99,7 +99,6 @@
                 <version>6.1.26</version>
                 <configuration>
                     <!--<jettyenvxml>jetty/jetty-env.xml</jettyenvxml>-->
-                    <reload>manual</reload>
                     <contextPath>/</contextPath>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

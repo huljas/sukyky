@@ -1,5 +1,6 @@
 package com.sukyky.repository;
 
+import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.*;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.Date;
 import java.util.List;
 
+@Jamon("Repository")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class JpaStockRepository implements StockRepository{
 
@@ -28,17 +30,25 @@ public class JpaStockRepository implements StockRepository{
         return em.find(Stock.class, id);
     }
 
-    public StockHistory findHistory(Long id, Date start, Date end) {
+    @Cacheable("stockRepository")
+    public Object[] findHistory(Long id, Date start, Date end) {
         List<Object[]> results = em.createNativeQuery("select avg(price), date(time) from trade " +
                 "where stock_id = :id " +
-                "and time <= :start and " +
-                "time >= :end " +
+                "and time <= :end and " +
+                "time >= :start " +
                 "group by date(time) order by date(time)")
                 .setParameter("id", id)
                 .setParameter("start", start)
                 .setParameter("end", end)
                 .getResultList();
-        return new StockHistory(results);
+        Date[] dates = new Date[results.size()];
+        int[] prices = new int[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            Object[] result = results.get(i);
+            prices[i] = ((Number)result[0]).intValue();
+            dates[i] = (Date) result[1];
+        }
+        return new Object[]{prices, dates};
     }
 
     public Trade getLastTrade(Long id) {
@@ -61,7 +71,6 @@ public class JpaStockRepository implements StockRepository{
         if (prices.isEmpty()) return null; else return prices.get(0);
     }
 
-    @Cacheable("stockRepository")
     public int getMin(Long id, Date start) {
         Integer result = em.createQuery("select min(o.price) " +
                 "from Trade o " +
@@ -71,7 +80,6 @@ public class JpaStockRepository implements StockRepository{
         return result;
     }
 
-    @Cacheable("stockRepository")
     public int getMax(Long id, Date start) {
         Integer result = em.createQuery("select max(o.price) " +
                 "from Trade o " +

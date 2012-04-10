@@ -5,8 +5,8 @@ $(function () {
         jqxhr.success(function (data) {
             console.log("success", data);
             var d = [];
-            for (var i = 0; i < data.rates.length; i++) {
-                d.push([i, data.rates[i] / 100]);
+            for (var i = 0; i < data.prices.length; i++) {
+                d.push([i, data.prices[i] / 100]);
             }
             var options = {
                 series : {lines:{show:true}, points:{show:false}},
@@ -25,8 +25,8 @@ $(function () {
         jqxhr.success(function (data) {
             console.log("success", data);
             var d = [];
-            for (var i = 0; i < data.rates.length; i++) {
-                d.push([i, data.rates[i] / 100]);
+            for (var i = 0; i < data.prices.length; i++) {
+                d.push([i, data.prices[i] / 100]);
             }
             var options = {
                 series : {lines:{show:true}, points:{show:false}},

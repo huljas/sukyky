@@ -22,12 +22,20 @@ public class StockView {
         return stockService.getOpeningPrice(stock);
     }
 
+    private Integer closingPrice;
+
     public int getClosingPrice() {
-        return stockService.getClosingPrice(stock);
+        if (closingPrice == null) {
+        closingPrice = stockService.getClosingPrice(stock);
+        }
+        return closingPrice;
     }
 
+    public Integer lastPrice;
+
     public int getLastPrice() {
-        return stockService.getLastPrice(stock);
+        if (lastPrice != null) return lastPrice;
+        return lastPrice = stockService.getLastPrice(stock);
     }
 
     public Date getLastTime() {
@@ -42,15 +50,15 @@ public class StockView {
         return getChange() / (float) getClosingPrice();
     }
 
-    public String formatCurrency(int value) {
+    public synchronized String formatCurrency(int value) {
         return String.format("%.2f", value / 100f);
     }
 
-    public String formatPercentage(float value) {
+    public synchronized String formatPercentage(float value) {
         return String.format("%.2f", value*100) + " %";
     }
 
-    public String formatTime(Date time) {
+    public synchronized String formatTime(Date time) {
         return String.format("%tD %tT", time, time);
     }
 
