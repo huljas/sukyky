@@ -127,7 +127,7 @@ Find and eliminate database queries using caching.
 
 Goal: Throughput of site *over 1000 req/s*
  
-h3. 3. Stability
+h3. 4. Stability
 
 Reproduce OOM problem locally and fix it.
 
