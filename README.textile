@@ -35,6 +35,12 @@ h5. 6) Open web browser
 bc. http://localhost:8080/
 (might take a while ...)
 
+h5. 7) Install and open JMeter
+
+bc. cd ../jmeter-client
+ant jmeter
+(intalls and starts JMeter)
+
 h2. Tools
 
 h3. JMeter test client
