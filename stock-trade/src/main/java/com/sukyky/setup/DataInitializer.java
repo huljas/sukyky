@@ -17,6 +17,7 @@ public class DataInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
 
+    private static int ROWS_PER_STOCK = 50000;
 
     private Resource tradeOrderData;
 
@@ -69,7 +70,7 @@ public class DataInitializer {
         logger.info("Populating trade data!");
         if (!dataInitializerRepository.hasTradeOrders()) {
             final List<Stock> stocks = dataInitializerRepository.getStocks();
-            final int n = 100000;
+            final int n = ROWS_PER_STOCK;
             long time = System.currentTimeMillis();
             ExecutorService executor = Executors.newFixedThreadPool(8);
             for (final Stock stock : stocks) {

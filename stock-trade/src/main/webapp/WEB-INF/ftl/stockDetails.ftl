@@ -20,7 +20,7 @@
             <tbody>
             <tr>
                 <th>Range:</th>
-                <td>${stock.formatCurrency(stock.getDailyMin())} - ${stock.formatCurrency(stock.getDailyMin())}</td>
+                <td>${stock.formatCurrency(stock.getDailyMin())} - ${stock.formatCurrency(stock.getDailyMax())}</td>
             </tr>
             <tr>
                 <th>52 week:</th>

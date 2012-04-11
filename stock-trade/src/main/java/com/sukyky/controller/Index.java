@@ -41,15 +41,10 @@ public class Index {
                 return new Float(o1.getChangePercentage()).compareTo(o2.getChangePercentage());
             }
         });
-        downStocks = downStocks.subList(0, 5);
 
-        List<StockView> upStocks = new ArrayList<StockView>(stocks);
-        Collections.sort(upStocks, new Comparator<StockView>() {
-            public int compare(StockView o1, StockView o2) {
-                return new Float(o2.getChangePercentage()).compareTo(o1.getChangePercentage());
-            }
-        });
-        upStocks = upStocks.subList(0, 5);
+        List<StockView> upStocks = downStocks.subList(downStocks.size() - 5, downStocks.size());
+        Collections.reverse(upStocks);
+        downStocks = downStocks.subList(0, 5);
 
         model.addAttribute("downStocks", downStocks);
         model.addAttribute("upStocks", upStocks);

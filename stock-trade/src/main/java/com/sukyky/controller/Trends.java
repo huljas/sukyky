@@ -25,7 +25,7 @@ public class Trends {
     @ResponseBody
     public StockHistory monthlyTrend(@PathVariable("id") Long id) {
         Date date = new Date();
-        Date since = StockServiceBean.minusDays(date, 30);
+        Date since = minusDays(date, 30);
         StockHistory history = stockService.findHistory(id, since);
         return history;
     }
@@ -34,7 +34,7 @@ public class Trends {
     @ResponseBody
     public StockHistory yearlyTrend(@PathVariable("id") Long id) {
         Date date = new Date();
-        Date since = StockServiceBean.minusDays(date, 365);
+        Date since = minusDays(date, 365);
         StockHistory history = stockService.findHistory(id, since);
         return history;
     }

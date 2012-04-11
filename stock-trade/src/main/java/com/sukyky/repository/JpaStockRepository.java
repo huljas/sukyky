@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.Date;
 import java.util.List;
 
-@Jamon("Repository")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class JpaStockRepository implements StockRepository{
 

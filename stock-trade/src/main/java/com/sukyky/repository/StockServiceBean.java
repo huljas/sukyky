@@ -11,14 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Jamon("Service")
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class StockServiceBean implements StockService {
@@ -62,40 +57,33 @@ public class StockServiceBean implements StockService {
 
     public int getDailyMin(Stock stock) {
         Trade order = stockRepository.getLastTrade(stock.id);
-        Date start = minusDays(order.time, 1);
+        LocalDate localDate = new LocalDate(order.time);
+        Date start = localDate.minusDays(1).toDateTimeAtStartOfDay().toDate();
         return stockRepository.getMin(stock.id, start);
     }
 
     public int getDailyMax(Stock stock) {
         Trade order = stockRepository.getLastTrade(stock.id);
-        Date start = minusDays(order.time, 1);
+        LocalDate localDate = new LocalDate(order.time);
+        Date start = localDate.minusDays(1).toDateTimeAtStartOfDay().toDate();
         return stockRepository.getMax(stock.id, start);
     }
 
     public int getYearlyMin(Stock stock) {
         Trade order = stockRepository.getLastTrade(stock.id);
-        Date start = minusDays(order.time, 365);
+        LocalDate localDate = new LocalDate(order.time);
+        Date start = localDate.minusDays(365).toDateTimeAtStartOfDay().toDate();
         return stockRepository.getMin(stock.id, start);
     }
 
     public int getYearlyMax(Stock stock) {
         Trade order = stockRepository.getLastTrade(stock.id);
-        Date start = minusDays(order.time, 365);
+        LocalDate localDate = new LocalDate(order.time);
+        Date start = localDate.minusDays(365).toDateTimeAtStartOfDay().toDate();
         return stockRepository.getMax(stock.id, start);
     }
 
     public Date getLastTime(Stock stock) {
         return stockRepository.getLastTrade(stock.id).time;
-    }
-
-    public static Date minusDays(Date now, int days) {
-        Calendar last = Calendar.getInstance();
-        last.setTime(now);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, last.get(Calendar.DAY_OF_MONTH));
-        calendar.set(Calendar.MONTH, last.get(Calendar.MONTH));
-        calendar.set(Calendar.YEAR, last.get(Calendar.YEAR));
-        calendar.add(Calendar.DAY_OF_MONTH, -1*days);
-        return calendar.getTime();
     }
 }
