@@ -22,20 +22,12 @@ public class StockView {
         return stockService.getOpeningPrice(stock);
     }
 
-    private Integer closingPrice;
-
     public int getClosingPrice() {
-        if (closingPrice == null) {
-        closingPrice = stockService.getClosingPrice(stock);
-        }
-        return closingPrice;
+        return stockService.getClosingPrice(stock);        
     }
 
-    public Integer lastPrice;
-
     public int getLastPrice() {
-        if (lastPrice != null) return lastPrice;
-        return lastPrice = stockService.getLastPrice(stock);
+        return stockService.getLastPrice(stock);
     }
 
     public Date getLastTime() {
