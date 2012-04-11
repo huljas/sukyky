@@ -28,7 +28,7 @@ public class JpaStockRepository implements StockRepository{
         return em.find(Stock.class, id);
     }
 
-    @Cacheable("stockRepository")
+    @Cacheable("long")
     public Object[] findHistory(Long id, Date start, Date end) {
         List<Object[]> results = em.createNativeQuery("select avg(price), date(time) from trade " +
                 "where stock_id = :id " +
