@@ -29,18 +29,21 @@ h5. 5) Run
 bc. mvn jetty:run
 ...
 [INFO] Started Jetty Server
-(Generates test data on the first run so might take a while)
+
+_Generates test data on the first run so please be patient ;)._
 
 h5. 6) Open web browser
 
 bc. http://localhost:8080/
-(might take a while ...)
+
+_Well this will take a while ..._
 
 h5. 7) Start JMeter
 
 bc. cd ../jmeter-client
 ant jmeter
-(downloads and starts JMeter)
+
+_Downloads and starts JMeter._
 
 h2. Tools
 
