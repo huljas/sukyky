@@ -115,16 +115,23 @@ Find out why the loading the front page takes so long and fix it.
 
 Goal: Front page response time *less than 100ms*.
 
-h3. 2. No throughput
+h3. 2. Find the bottleneck
 
-Find out why the throughput doesn't increase as the number of threads increases and fix it.
+Find out why the CPU usage doesn't increase as the number of threads increases.
 
-Goal: Throughput of front page and stock page *over 500req/s*.
+Goal: *CPU usage close to 100%*
 
+h3. 3. Cache it
+
+Find and eliminate database queries using caching.
+
+Goal: Throughput of site *over 1000 req/s*
+ 
 h3. 3. Stability
 
-Site has had some stability problems in production. See if you can find out the cause.
+Reproduce OOM problem locally and fix it.
 
+Goal: No more OOM
 
 
 
