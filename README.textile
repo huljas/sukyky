@@ -4,8 +4,6 @@ Open source J2EE performance training project implemented with Spring MVC.
 
 h2. Setting up
 
-The training project requires a local MySQL instance.
-
 h5. 1) Clone
 
 bc. git clone git@github.com:huljas/sukyky.git
