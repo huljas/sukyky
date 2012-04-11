@@ -22,7 +22,7 @@ bc. vi stock-trade/src/main/resources/database.properties
 h5. 4) Create database
 
 bc. cd stock-trade
-mvn db-migration:create
+mvn db-mirgation:drop db-migration:create db-migration:migrate
 
 h5. 5) Run
 
