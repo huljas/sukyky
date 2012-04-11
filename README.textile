@@ -17,6 +17,8 @@ mvn install
 
 h5. 3) Configure database
 
+You will need a MySQL Community Server, download it "here":http://dev.mysql.com/downloads/mysql/
+
 bc. vi stock-trade/src/main/resources/db.properties
 
 h5. 4) Create database
