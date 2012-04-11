@@ -1,6 +1,5 @@
-package com.sukyky.repository;
+package com.sukyky.service;
 
-import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockHistory;
 import com.sukyky.model.Trade;
@@ -45,42 +44,6 @@ public class StockServiceBean implements StockService {
 
     public int getLastPrice(Stock stock) {
         return stockRepository.getLastTrade(stock.id).price;
-    }
-
-    @Cacheable("stockService")
-    public StockHistory findHistory(Long id, Date since) {
-        LocalDate end = new LocalDate();
-        LocalDate start = new LocalDate(since);
-        Object[] history = stockRepository.findHistory(id, start.toDateTimeAtStartOfDay().toDate(), end.toDateTimeAtStartOfDay().toDate());
-        return new StockHistory(history);
-    }
-
-    public int getDailyMin(Stock stock) {
-        Trade order = stockRepository.getLastTrade(stock.id);
-        LocalDate localDate = new LocalDate(order.time);
-        Date start = localDate.minusDays(1).toDateTimeAtStartOfDay().toDate();
-        return stockRepository.getMin(stock.id, start);
-    }
-
-    public int getDailyMax(Stock stock) {
-        Trade order = stockRepository.getLastTrade(stock.id);
-        LocalDate localDate = new LocalDate(order.time);
-        Date start = localDate.minusDays(1).toDateTimeAtStartOfDay().toDate();
-        return stockRepository.getMax(stock.id, start);
-    }
-
-    public int getYearlyMin(Stock stock) {
-        Trade order = stockRepository.getLastTrade(stock.id);
-        LocalDate localDate = new LocalDate(order.time);
-        Date start = localDate.minusDays(365).toDateTimeAtStartOfDay().toDate();
-        return stockRepository.getMin(stock.id, start);
-    }
-
-    public int getYearlyMax(Stock stock) {
-        Trade order = stockRepository.getLastTrade(stock.id);
-        LocalDate localDate = new LocalDate(order.time);
-        Date start = localDate.minusDays(365).toDateTimeAtStartOfDay().toDate();
-        return stockRepository.getMax(stock.id, start);
     }
 
     public Date getLastTime(Stock stock) {

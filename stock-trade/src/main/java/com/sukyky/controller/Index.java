@@ -3,7 +3,8 @@ package com.sukyky.controller;
 import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.Stock;
 import com.sukyky.model.StockView;
-import com.sukyky.repository.StockService;
+import com.sukyky.service.StatisticsService;
+import com.sukyky.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class Index {
     @Autowired
     private StockService stockService;
 
+    @Autowired
+    private StatisticsService statisticsService;
+
     @RequestMapping("/")
 	public String show(Model model) {
         List<Stock> list = stockService.findAllStocks();
@@ -32,7 +36,7 @@ public class Index {
         List<StockView> stocks = new ArrayList<StockView>();
 
         for (Stock stock : list) {
-            stocks.add(new StockView(stock, stockService));
+            stocks.add(new StockView(stock, stockService, statisticsService));
         }
 
         List<StockView> downStocks = new ArrayList<StockView>(stocks);

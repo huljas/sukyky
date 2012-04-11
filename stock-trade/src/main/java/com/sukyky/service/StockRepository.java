@@ -1,7 +1,6 @@
-package com.sukyky.repository;
+package com.sukyky.service;
 
 import com.sukyky.model.Stock;
-import com.sukyky.model.StockHistory;
 import com.sukyky.model.Trade;
 
 import java.util.Date;

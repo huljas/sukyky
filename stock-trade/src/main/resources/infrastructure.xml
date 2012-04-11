@@ -18,7 +18,7 @@
         <property name="validationQuery" value="SELECT 3"/>
         <property name="maxIdle" value="6"/>
         <property name="minIdle" value="4"/>
-        <property name="maxActive" value="8"/>
+        <property name="maxActive" value="1"/>
         <property name="maxWait" value="30000"/>
     </bean>
 

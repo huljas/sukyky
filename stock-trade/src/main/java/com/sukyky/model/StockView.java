@@ -1,6 +1,7 @@
 package com.sukyky.model;
 
-import com.sukyky.repository.StockService;
+import com.sukyky.service.StatisticsService;
+import com.sukyky.service.StockService;
 
 import java.util.Date;
 
@@ -13,9 +14,12 @@ public class StockView {
 
     public StockService stockService;
 
-    public StockView(Stock stock, StockService stockService) {
+    public StatisticsService statisticsService;
+
+    public StockView(Stock stock, StockService stockService, StatisticsService statisticsService) {
         this.stock = stock;
         this.stockService = stockService;
+        this.statisticsService = statisticsService;
     }
 
     public int getOpeningPrice() {
@@ -63,19 +67,19 @@ public class StockView {
     }
 
     public int getDailyMin() {
-        return stockService.getDailyMin(stock);
+        return statisticsService.getDailyMin(stock);
     }
 
     public int getDailyMax() {
-        return stockService.getDailyMax(stock);
+        return statisticsService.getDailyMax(stock);
     }
 
     public int getYearlyMin() {
-        return stockService.getYearlyMin(stock);
+        return statisticsService.getYearlyMin(stock);
     }
 
     public int getYearlyMax() {
-        return stockService.getYearlyMax(stock);
+        return statisticsService.getYearlyMax(stock);
     }
 
     public String getChangeDirection() {

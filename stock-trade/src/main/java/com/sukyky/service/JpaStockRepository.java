@@ -1,6 +1,5 @@
-package com.sukyky.repository;
+package com.sukyky.service;
 
-import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.*;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Propagation;

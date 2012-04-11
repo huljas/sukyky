@@ -2,9 +2,8 @@ package com.sukyky.controller;
 
 import com.sukyky.jamon.aspect.Jamon;
 import com.sukyky.model.StockHistory;
-import com.sukyky.repository.StockService;
-import com.sukyky.repository.StockServiceBean;
-import org.joda.time.LocalDate;
+import com.sukyky.service.HistoryService;
+import com.sukyky.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +18,14 @@ import java.util.Date;
 public class Trends {
 
     @Autowired
-    private StockService stockService;
+    private HistoryService historyService;
 
     @RequestMapping("/trends/{id}/monthly")
     @ResponseBody
     public StockHistory monthlyTrend(@PathVariable("id") Long id) {
         Date date = new Date();
         Date since = minusDays(date, 30);
-        StockHistory history = stockService.findHistory(id, since);
+        StockHistory history = historyService.findHistory(id, since);
         return history;
     }
 
@@ -35,7 +34,7 @@ public class Trends {
     public StockHistory yearlyTrend(@PathVariable("id") Long id) {
         Date date = new Date();
         Date since = minusDays(date, 365);
-        StockHistory history = stockService.findHistory(id, since);
+        StockHistory history = historyService.findHistory(id, since);
         return history;
     }
 
