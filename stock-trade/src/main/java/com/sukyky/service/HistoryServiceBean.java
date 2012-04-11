@@ -15,7 +15,7 @@ public class HistoryServiceBean implements HistoryService {
     private StockRepository stockRepository;
 
     // Caching the history object should save us some time!
-    @Cacheable("stockService")
+    @Cacheable("long")
     public StockHistory findHistory(Long id, Date since) {
         LocalDate end = new LocalDate();
         LocalDate start = new LocalDate(since);
