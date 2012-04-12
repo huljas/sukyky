@@ -164,6 +164,9 @@
     <file type="web" url="file://$PROJECT_DIR$/stock-trade" />
   </component>
   <component name="IdProvider" IDEtalkID="B85CD7DDFAF77AE2F5BE6BF347CCAAED" />
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.5" />
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
     <option name="OPTION_SCOPE" value="protected" />
