@@ -6,7 +6,7 @@ h2. Setting up
 
 h5. 1) Clone
 
-bc. git clone git@github.com:huljas/sukyky.git
+bc. git clone git://github.com/huljas/sukyky.git
 
 h5. 2) Build
 
