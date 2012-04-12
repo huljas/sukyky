@@ -43,7 +43,9 @@ h5. 7) Start JMeter
 bc. cd ../jmeter-client
 ant jmeter
 
-_Downloads and starts JMeter._
+h5. 8) Open JMeter Test Plan
+
+bc. jmeter-client/src/test/jmeter/Basic.xml
 
 h2. Tools
 
@@ -52,17 +54,6 @@ h3. JMeter test client
 "JMeter":http://jmeter.apache.org/
 
 "Jmeter-plugins":http://code.google.com/p/jmeter-plugins/
-
-h4. Starting up
-
-bc. cd jmeter-client
-ant jmeter
-
-_This installs and starts the client._
-
-Next select File - Open and open the file in
-
-bc. jmeter-client/src/test/jmeter/Basic.xml
 
 h3. Jamon monitoring API
 
@@ -89,9 +80,15 @@ bc. http://localhost:8080/jamon/admin
 
 h3. Java SE tools
 
+h4. jps
+
+"Java Virtual Machine Process Status Tool":http://docs.oracle.com/javase/1.5.0/docs/tooldocs/share/jps.html
+
 h4. jconsole
 
 "Java monitoring and management console":http://docs.oracle.com/javase/6/docs/technotes/tools/share/jconsole.html
+
+bc. jconsole <pid>
 
 h4. jmap
 
@@ -129,9 +126,9 @@ Goal: Throughput of site *over 1000 req/s*
  
 h3. 4. Stability
 
-Reproduce OOM problem locally and fix it.
+Reproduce stability problem locally and fix it.
 
-Goal: No more OOM
+Goal: No more crashes
 
 
 
