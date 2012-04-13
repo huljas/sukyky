@@ -25,6 +25,13 @@
 		</repository>
 	</repositories>
 
+<pluginRepositories>
+        <pluginRepository>
+            <id>c5-public-repository</id>
+            <url>http://mvn.carbonfive.com/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 	<dependencies>
 
 		<!-- SPRING FRAMEWORK -->
