@@ -106,6 +106,9 @@ General tips:
 * Use <code>@Jamon</code> annotation to get better understanding of the problem
 * Measure again after each change
 
+Results spreadsheet
+https://docs.google.com/spreadsheet/ccc?key=0AnxBzb-BpUDJdDhRZkt1RmcwMWNpNlA1Z2dSalZkWGc
+
 h3. 1. Slow front page
 
 Find out why the loading the front page takes so long and fix it.
