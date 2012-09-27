@@ -53,9 +53,9 @@ h3. JMeter test client
 
 "JMeter":http://jmeter.apache.org/
 
-"Jmeter-plugins":http://code.google.com/p/jmeter-plugins/
+"JMeter-plugins":http://code.google.com/p/jmeter-plugins/
 
-h3. Jamon monitoring API
+h3. JAMon Java application monitor
 
 "Jamon Api":http://jamonapi.sourceforge.net/
 
