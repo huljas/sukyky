@@ -53,9 +53,9 @@ h3. JMeter test client
 
 "JMeter":http://jmeter.apache.org/
 
-"Jmeter-plugins":http://code.google.com/p/jmeter-plugins/
+"JMeter-plugins":http://code.google.com/p/jmeter-plugins/
 
-h3. Jamon monitoring API
+h3. JAMon Java application monitor
 
 "Jamon Api":http://jamonapi.sourceforge.net/
 
@@ -105,6 +105,9 @@ General tips:
 * Measure, don't guess
 * Use <code>@Jamon</code> annotation to get better understanding of the problem
 * Measure again after each change
+
+Results spreadsheet
+https://docs.google.com/spreadsheet/ccc?key=0AnxBzb-BpUDJdDhRZkt1RmcwMWNpNlA1Z2dSalZkWGc
 
 h3. 1. Slow front page
 
