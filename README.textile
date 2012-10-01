@@ -22,7 +22,12 @@ bc. vi stock-trade/src/main/resources/database.properties
 h5. 4) Create database
 
 bc. cd stock-trade
-mvn db-migration:drop db-migration:create db-migration:migrate
+mvn db-migration:create db-migration:migrate
+
+If you want to recreate the database run
+bc. mvn db-migration:drop
+
+first
 
 h5. 5) Run
 
@@ -96,7 +101,7 @@ h4. jmap
 
 Checking heap histogram
 
-bc. jmat -histo:live <pid>
+bc. jmap -histo:live <pid>
 
 h2. Exercises
 

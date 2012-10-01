@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name="stock")
 public class Stock {
 
     @Id @GeneratedValue
