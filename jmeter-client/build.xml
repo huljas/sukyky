@@ -5,7 +5,7 @@
 
     <target name="clean">
         <delete dir="target/install"/>
-        <delete dir="target/jmeter"/>
+        <delete dir="target/apache-jmeter-2.6"/>
     </target>
 
     <target name="check-installation" unless="installation.present">
@@ -23,6 +23,7 @@
         <unzip src="${jmeter.zip}" dest="target"/>
         <unzip src="${jmeter.plugins.zip}" dest="target/jmeter-plugins"/>
         <copy file="target/jmeter-plugins/JMeterPlugins.jar" tofile="target/apache-jmeter-2.6/lib/ext/JMeterPlugins.jar"/>
+        <chmod dir="target/apache-jmeter-2.6" perm="ugo+rx" includes="**/*.sh"/>
     </target>
 
     <target name="jmeter" depends="download,install">
